@@ -27,11 +27,11 @@ class SalarySlipController extends Controller
     public function index()
     {
 
-        $data['salary_structure'] = SalaryStructureModel::leftJoin('employe_basic_info','employe_basic_info.id','=','salary_structure.employee_basic_info_id')
+        $data['salary_structure'] = SalaryStructureModel::leftJoin('users','users.id','=','salary_structure.employee_basic_info_id')
                         ->leftJoin('branch','branch.branch_id', '=', 'salary_structure.branch_id')
                         ->leftJoin('department','department.department_id', '=', 'salary_structure.department_id')
                         ->leftJoin('designation','designation.designation_id', '=', 'salary_structure.designation_id')
-                        ->select('employe_basic_info.employe_name','branch.branch_name','department.department_name','designation.designation_name','salary_structure.*')
+                        ->select('users.employe_name','branch.branch_name','department.department_name','designation.designation_name','salary_structure.*')
                         ->get();
         return view('payroll.salary_slip',$data);
     }
@@ -108,11 +108,11 @@ class SalarySlipController extends Controller
         $data['designation'] = DesignationModel::get();
         $data['salary_structure_component'] = SalaryStructureComponentModel::where('salary_structure_id',$id)->get();
 
-        $data['salary_structure_data'] = SalaryStructureModel::leftJoin('employe_basic_info','employe_basic_info.id','=','salary_structure.employee_basic_info_id')
+        $data['salary_structure_data'] = SalaryStructureModel::leftJoin('users','users.id','=','salary_structure.employee_basic_info_id')
                         ->leftJoin('branch','branch.branch_id', '=', 'salary_structure.branch_id')
                         ->leftJoin('department','department.department_id', '=', 'salary_structure.department_id')
                         ->leftJoin('designation','designation.designation_id', '=', 'salary_structure.designation_id')
-                        ->select('employe_basic_info.employe_name','branch.branch_name','department.department_name','designation.designation_name','salary_structure.*')
+                        ->select('users.employe_name','branch.branch_name','department.department_name','designation.designation_name','salary_structure.*')
                         ->where('salary_structure.id',$id)
                         ->first();
 
@@ -167,27 +167,27 @@ class SalarySlipController extends Controller
         $employee_id =$employee->pluck('employee_basic_info_id')->unique()->toArray();
         $data = EmployeModel::where(function($query) use($requested_data) {
             if ($requested_data['branch_id']) {
-                $query->where('employe_basic_info.branch_name', $requested_data['branch_id']);
+                $query->where('users.branch_name', $requested_data['branch_id']);
             }
             if ($requested_data['department_id']) {
-                $query->where('employe_basic_info.department_name', $requested_data['department_id']);
+                $query->where('users.department_name', $requested_data['department_id']);
             }
             if ($requested_data['designation_id']) {
-                $query->where('employe_basic_info.designation_name', $requested_data['designation_id']);
+                $query->where('users.designation_name', $requested_data['designation_id']);
             }
             // if ($requested_data['month']) {
             //     $query->where('salary_slip.month',$requested_data['month']);
             // }
-        })->leftJoin('salary_structure','salary_structure.employee_basic_info_id','=','employe_basic_info.id')
-          ->leftJoin('branch','branch.branch_id', '=', 'employe_basic_info.branch_name')
-          ->leftJoin('department','department.department_id', '=', 'employe_basic_info.department_name')
-          ->leftJoin('designation','designation.designation_id', '=', 'employe_basic_info.designation_name')
-          ->select('employe_basic_info.employe_name',
+        })->leftJoin('salary_structure','salary_structure.employee_basic_info_id','=','users.id')
+          ->leftJoin('branch','branch.branch_id', '=', 'users.branch_name')
+          ->leftJoin('department','department.department_id', '=', 'users.department_name')
+          ->leftJoin('designation','designation.designation_id', '=', 'users.designation_name')
+          ->select('users.employe_name',
                     'branch.branch_name as branchname',
                     'department.department_name as departmentname', 
                     'designation.designation_name as designationname', 
-                    'employe_basic_info.*', 
-                    'salary_structure.*','salary_structure.id as salary_structure_id')->whereIn('employe_basic_info.id',$employee_id)
+                    'users.*', 
+                    'salary_structure.*','salary_structure.id as salary_structure_id')->whereIn('users.id',$employee_id)
                                     ->get();
         $fetch_data = array();
         $salary_slip = SalarySlipModel::where('month', $requested_data['month'])->get()->toArray();
@@ -215,19 +215,19 @@ class SalarySlipController extends Controller
         $employee_id =$employee->pluck('employee_basic_info_id')->unique()->toArray();
         $data = EmployeModel::where(function($query) use($requested_data) {
             if ($requested_data['branch_id']) {
-                $query->where('employe_basic_info.branch_name', $requested_data['branch_id']);
+                $query->where('users.branch_name', $requested_data['branch_id']);
             }
             if ($requested_data['department_id']) {
-                $query->where('employe_basic_info.department_name', $requested_data['department_id']);
+                $query->where('users.department_name', $requested_data['department_id']);
             }
             if ($requested_data['designation_id']) {
-                $query->where('employe_basic_info.designation_name', $requested_data['designation_id']);
+                $query->where('users.designation_name', $requested_data['designation_id']);
             }
-        })->leftJoin('salary_structure','salary_structure.employee_basic_info_id','=','employe_basic_info.id')
-          ->select('employe_basic_info.employe_name',
-                    'employe_basic_info.*', 
+        })->leftJoin('salary_structure','salary_structure.employee_basic_info_id','=','users.id')
+          ->select('users.employe_name',
+                    'users.*', 
                     'salary_structure.*','salary_structure.id as salary_structure_id')
-          ->whereIn('employe_basic_info.id',$employee_id)
+          ->whereIn('users.id',$employee_id)
           ->get();
 
         $salary_slip = SalarySlipModel::where('month', $requested_data['month'])->get()->toArray();

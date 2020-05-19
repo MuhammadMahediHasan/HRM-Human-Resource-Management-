@@ -3,7 +3,8 @@ body {
 	font-size: 12px;
 	overflow-x: hidden;
 	color: #333;
-	font-family: open sans, sans-serif;
+	/*font-family: open sans, sans-serif;*/
+	font-family: inherit;
 	background-image: linear-gradient(rgba(255, 255, 255, 0.7) 240px, #f2f7fb 0%)
 }
 ul {
@@ -37,7 +38,7 @@ h4,
 h5,
 h6 {
 	font-weight: 500;
-	font-family: quicksand, sans-serif
+	font-family: inherit;
 }
 h1 {
 	font-size: 2.5rem
@@ -396,7 +397,7 @@ code {
 	color: "Quicksand", sans-serif
 }
 .page-header.card .page-block .breadcrumb .breadcrumb-item+.breadcrumb-item:before {
-	font-family: feather;
+	font-family: inherit;
 	content: "\e844";
 	color: "Quicksand", sans-serif
 }
@@ -827,7 +828,7 @@ a.bg-danger:hover {
 	height: 100%;
 	text-align: center;
 	color: #fff;
-	font-family: courier new, Courier, monospace;
+	font-family: inherit;
 	padding: 50px 0
 }
 .ie-warning p {
@@ -2769,13 +2770,13 @@ table thead .border-bottom-info th {
 	z-index: 1029;
 	position: relative;
 	display: block;
-	font-family: quicksand, sans-serif;
+	font-family: inherit;
 	-webkit-box-shadow: 0 2px 4px 0 rgba(43, 43, 43, .1);
 	box-shadow: 0 2px 4px 0 rgba(43, 43, 43, .1)
 }
 .pcoded .pcoded-navbar {
 	display: block;
-	font-family: quicksand, sans-serif
+	font-family: inherit;
 }
 .pcoded .pcoded-navbar .nav-list {
 	overflow: hidden;
@@ -3137,7 +3138,7 @@ table thead .border-bottom-info th {
 	top: 0;
 	opacity: 1;
 	visibility: visible;
-	font-family: feather;
+	font-family: inherit;
 	font-size: 12px;
 	padding-right: 5px
 }
@@ -3178,7 +3179,7 @@ table thead .border-bottom-info th {
 	position: absolute;
 	right: 15px;
 	top: 5px;
-	font-family: feather;
+	font-family: inherit;
 	padding-top: 5px;
 	-webkit-transition: opacity .3s linear;
 	transition: opacity .3s linear
@@ -5754,7 +5755,7 @@ body[themebg-pattern=theme6] {
 	left: 10px
 }
 .selector-toggle>a:before {
-	font-family: feather;
+	font-family: inherit;
 	font-size: 20px;
 	content: "\e8c3";
 	position: relative;

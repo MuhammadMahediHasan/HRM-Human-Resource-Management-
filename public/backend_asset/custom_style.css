@@ -50,3 +50,12 @@
 .pcoded .pcoded-navbar .pcoded-item .pcoded-hasmenu .pcoded-submenu li>a {
     font-size: 12px;
 }
+
+.modal-body {
+    border: 1px solid #ddd;
+    margin: 15px;
+}
+
+.modal-content {
+    border-radius: 3px;
+}

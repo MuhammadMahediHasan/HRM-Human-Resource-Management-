@@ -27,7 +27,7 @@ class AttendenceReportController extends Controller
     	else
     	{
     		$attendence_report=AttendenceParentModel::join('attendence_child','attendence_parent.attendence_parent_id','=','attendence_child.attendence_parent_id')
-    							->join('employe_basic_info','attendence_child.id','=','employe_basic_info.id')
+    							->join('users','attendence_child.id','=','users.id')
     							->where('attendence_parent.attendence_parent_department','=',$request->department)
     							->where('attendence_parent.attendence_parent_date','=',$request->date)
     							->get();

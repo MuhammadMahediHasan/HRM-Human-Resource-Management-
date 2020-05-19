@@ -24,7 +24,7 @@ class EmployeTransferController extends Controller
         $branch=BranchModel::where('branch_status','Active')->get();
         $department=DepartmentModel::where('department_status','Active')->get();
 
-        $employe_transfer=EmployeTransferModel::join('employe_basic_info','employe_transfer.id','=','employe_basic_info.id')->get();
+        $employe_transfer=EmployeTransferModel::join('users','employe_transfer.id','=','users.id')->get();
         return view('employe.employe_transfer',['branch'=>$branch,'department'=>$department,'employe_transfer'=>$employe_transfer]);
     }
 
@@ -57,9 +57,9 @@ class EmployeTransferController extends Controller
             $employe_transfer_data->fill($request->all())->save();
             // return back();
             $id=$request->id;
-            $employe_basic_info=EmployeModel::findOrFail($id);
-            $employe_basic_info->update(['branch_name'=>$request->present_branch]);
-            $employe_basic_info->update(['department_name'=>$request->present_department]);
+            $users=EmployeModel::findOrFail($id);
+            $users->update(['branch_name'=>$request->present_branch]);
+            $users->update(['department_name'=>$request->present_department]);
 
             Toastr::success('Employee Transfer Successfully', '', ["positionClass" => "toast-top-right"]);
             return back();
@@ -115,8 +115,8 @@ class EmployeTransferController extends Controller
     public function get_employe_transfer_data(Request $request)
     {
         $employe_code=$request->employe_code;
-        return EmployeModel::join('department','employe_basic_info.department_name','=','department.department_id')
-                            ->join('branch','employe_basic_info.branch_name','=','branch.branch_id')
+        return EmployeModel::join('department','users.department_name','=','department.department_id')
+                            ->join('branch','users.branch_name','=','branch.branch_id')
                             ->where('employe_code',$employe_code)->first();
     }
 }

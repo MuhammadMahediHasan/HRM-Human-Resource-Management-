@@ -8,21 +8,16 @@
             <div class="col-lg-8">
                 <div class="page-header-title">
 
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif          
 
-@if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif         
-
-<link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
-<script src="http://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
-<script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>  
-        {!! Toastr::message() !!}                      
                     <!-- Trigger the modal with a button -->
                     <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">Add New Designation</button>
 
@@ -36,8 +31,8 @@
                             <h4 class="modal-title">Add Designation</h4>
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
                           </div>
+                          {{Form::open(['url'=>'/designation'])}}
                           <div class="modal-body">
-                            {{Form::open(['url'=>'/designation'])}}
                             <div class="form-group row">
                                 <label class="col-sm-4 col-form-label">Department Name</label>
                                 <div class="col-sm-8">
@@ -52,7 +47,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-4 col-form-label">Designation Name</label>
                                 <div class="col-sm-8">
-                                    {{Form::text('designation_name','',['class'=>'form-control'])}}
+                                    {{Form::text('designation_name','',['class'=>'form-control','placeholder'=>'Name'])}}
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -62,14 +57,13 @@
                                 </div>
                             </div>
 
-                            <center>
-                                <button class="btn btn-success">Submit</button>
-                            </center>
                           </div>
-                          {{Form::close()}}
                           <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button class="btn btn-success btn-sm">Submit</button>
+                            <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
                           </div>
+                          
+                          {{Form::close()}}
                         </div>
 
                       </div>

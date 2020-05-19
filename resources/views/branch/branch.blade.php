@@ -26,7 +26,7 @@
                         <!-- Modal content-->
                         <div class="modal-content">
                           <div class="modal-header">
-                            <h4 class="modal-title">Modal Header</h4>
+                            <h4 class="modal-title">Branch</h4>
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
                           </div>
                           {{Form::open(['url'=>"/branch"])}}
@@ -34,7 +34,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-4 col-form-label">Name</label>
                                 <div class="col-sm-8">
-                                    {{Form::text('branch_name','',['class'=>'form-control'])}}
+                                    {{Form::text('branch_name','',['class'=>'form-control','placeholder'=>'Name'])}}
                                 </div>
                             </div>
 
@@ -44,14 +44,13 @@
                                     {{Form::select('branch_status',['Active'=>'Active','Inactive'=>'Inactive'],'null',['class'=>'form-control'])}}
                                 </div>
                             </div>
-
-                            <button class="btn btn-success">Sumbit</button>
-
-                            {{Form::close()}}
                           </div>
                           <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            
+                            <button class="btn btn-success btn-sm">Sumbit</button>
+                            <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
                           </div>
+                          {{Form::close()}}
                         </div>
 
                       </div>

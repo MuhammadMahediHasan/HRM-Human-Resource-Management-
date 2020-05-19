@@ -24,12 +24,13 @@ class SalaryStructureController extends Controller
      */
     public function index()
     {
-        $data['salary_structure'] = SalaryStructureModel::leftJoin('employe_basic_info','employe_basic_info.id','=','salary_structure.employee_basic_info_id')
+        $data['salary_structure'] = SalaryStructureModel::leftJoin('users','users.id','=','salary_structure.employee_basic_info_id')
                         ->leftJoin('branch','branch.branch_id', '=', 'salary_structure.branch_id')
                         ->leftJoin('department','department.department_id', '=', 'salary_structure.department_id')
                         ->leftJoin('designation','designation.designation_id', '=', 'salary_structure.designation_id')
-                        ->select('employe_basic_info.employe_name','branch.branch_name','department.department_name','designation.designation_name','salary_structure.*')
+                        ->select('users.employe_name','branch.branch_name','department.department_name','designation.designation_name','salary_structure.*')
                         ->get();
+                        
         return view('payroll.salary_structure_report',$data);
     }
 
@@ -131,11 +132,11 @@ class SalaryStructureController extends Controller
         $data['designation'] = DesignationModel::get();
         $data['salary_structure_component'] = SalaryStructureComponentModel::where('salary_structure_id',$id)->get();
 
-        $data['salary_structure_data'] = SalaryStructureModel::leftJoin('employe_basic_info','employe_basic_info.id','=','salary_structure.employee_basic_info_id')
+        $data['salary_structure_data'] = SalaryStructureModel::leftJoin('users','users.id','=','salary_structure.employee_basic_info_id')
                         ->leftJoin('branch','branch.branch_id', '=', 'salary_structure.branch_id')
                         ->leftJoin('department','department.department_id', '=', 'salary_structure.department_id')
                         ->leftJoin('designation','designation.designation_id', '=', 'salary_structure.designation_id')
-                        ->select('employe_basic_info.employe_name','branch.branch_name','department.department_name','designation.designation_name','salary_structure.*')
+                        ->select('users.employe_name','branch.branch_name','department.department_name','designation.designation_name','salary_structure.*')
                         ->where('salary_structure.id',$id)
                         ->first();
 

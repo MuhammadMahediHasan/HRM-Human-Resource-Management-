@@ -87,13 +87,13 @@ class EmployeController extends Controller
      */
     public function edit($id)
     {
-        $employe_data=EmployeModel::join('employe_contact_info','employe_contact_info.id','=','employe_basic_info.id')
-                    ->join('employe_bank_info','employe_bank_info.id','=','employe_basic_info.id')
-                    ->join('employe_joining_info','employe_joining_info.id','=','employe_basic_info.id')
-                    ->join('employe_personal_bio','employe_personal_bio.id','=','employe_basic_info.id')
-                    ->join('department','employe_basic_info.department_name','=','department.department_id')
-                    ->join('branch','branch.branch_id','=','employe_basic_info.branch_name')
-                    ->join('designation','designation.designation_id','=','employe_basic_info.designation_name')
+        $employe_data=EmployeModel::join('employe_contact_info','employe_contact_info.id','=','users.id')
+                    ->join('employe_bank_info','employe_bank_info.id','=','users.id')
+                    ->join('employe_joining_info','employe_joining_info.id','=','users.id')
+                    ->join('employe_personal_bio','employe_personal_bio.id','=','users.id')
+                    ->join('department','users.department_name','=','department.department_id')
+                    ->join('branch','branch.branch_id','=','users.branch_name')
+                    ->join('designation','designation.designation_id','=','users.designation_name')
                     ->findOrFail($id);
         $branch=BranchModel::where('branch_status','Active')->get();           
         $designation=DesignationModel::where('designation_status','Active')->get();           
@@ -221,8 +221,8 @@ class EmployeController extends Controller
 
     public function get_employe_report(Request $request)
     {
-        $employe_report=EmployeModel::join('branch','branch.branch_id','=','employe_basic_info.branch_name')
-                                    ->where('employe_basic_info.department_name',$request->department)
+        $employe_report=EmployeModel::join('branch','branch.branch_id','=','users.branch_name')
+                                    ->where('users.department_name',$request->department)
                                     ->get();
         return view('employe.employe_report_sheet',['employe_report'=>$employe_report]);
     }
@@ -230,14 +230,14 @@ class EmployeController extends Controller
 
     public function view_bio(Request $request)
     {
-        return EmployeModel::join('employe_contact_info','employe_contact_info.id','=','employe_basic_info.id')
-                    ->join('employe_bank_info','employe_bank_info.id','=','employe_basic_info.id')
-                    ->join('employe_joining_info','employe_joining_info.id','=','employe_basic_info.id')
-                    ->join('employe_personal_bio','employe_personal_bio.id','=','employe_basic_info.id')
-                    ->join('department','employe_basic_info.department_name','=','department.department_id')
-                    ->join('branch','branch.branch_id','=','employe_basic_info.branch_name')
-                    ->join('designation','designation.designation_id','=','employe_basic_info.designation_name')
-                    ->where('employe_basic_info.id',$request->id)
+        return EmployeModel::join('employe_contact_info','employe_contact_info.id','=','users.id')
+                    ->join('employe_bank_info','employe_bank_info.id','=','users.id')
+                    ->join('employe_joining_info','employe_joining_info.id','=','users.id')
+                    ->join('employe_personal_bio','employe_personal_bio.id','=','users.id')
+                    ->join('department','users.department_name','=','department.department_id')
+                    ->join('branch','branch.branch_id','=','users.branch_name')
+                    ->join('designation','designation.designation_id','=','users.designation_name')
+                    ->where('users.id',$request->id)
                     ->first();
     }
 

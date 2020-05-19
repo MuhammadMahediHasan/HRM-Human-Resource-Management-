@@ -13,7 +13,7 @@ class CreateEmploye extends Migration
      */
     public function up()
     {
-        Schema::create('employe_basic_info', function (Blueprint $table) {
+        Schema::create('users', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('employe_code');
             $table->string('employe_name');

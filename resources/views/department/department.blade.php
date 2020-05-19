@@ -34,7 +34,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-4 col-form-label">Name</label>
                                 <div class="col-sm-8">
-                                    {{Form::text('department_name','',['class'=>'form-control'])}}
+                                    {{Form::text('department_name','',['class'=>'form-control','placeholder'=>'Name'])}}
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -43,15 +43,13 @@
                                     {{form::select('department_status',['Active'=>'Active','Inactive'=>'Inactive'],null,['class'=>'form-control'])}}
                                 </div>
                             </div>
-
-                            <center>
-                                <button class="btn btn-success">Submit</button>
-                            </center>
-                            {{Form::close()}}
+                            
                           </div>
                           <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button class="btn btn-success btn-sm">Submit</button>
+                            <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
                           </div>
+                          {{Form::close()}}
                         </div>
 
                       </div>
