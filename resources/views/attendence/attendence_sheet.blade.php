@@ -21,7 +21,7 @@
               @foreach($department_data as $department_data_value)
               <tr>
                 <td>
-                  <input type="checkbox" class="checkbox" name="employe_basic_info_id[]" value="{{$department_data_value->employe_basic_info_id}}">
+                  <input type="checkbox" class="checkbox" name="id[]" value="{{$department_data_value->id}}">
                 </td>
                 <td>{{$department_data_value->employe_name}}</td>
                 <td>{{$department_data_value->employe_code}}</td>

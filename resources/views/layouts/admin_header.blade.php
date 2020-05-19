@@ -107,7 +107,7 @@
                                         @else
                                         <img src="https://colorlib.com//polygon/admindek/files/assets/images/avatar-4.jpg" class="img-radius" alt="User-Profile-Image">
                                         @endif
-                                        <span>{{ $user->name }}</span>
+                                        <span>{{ $user->employe_name }}</span>
                                         <i class="feather icon-chevron-down"></i>
                                     </div>
                                     <ul class="show-notification profile-notification dropdown-menu" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">

@@ -24,7 +24,7 @@ class SalaryStructureController extends Controller
      */
     public function index()
     {
-        $data['salary_structure'] = SalaryStructureModel::leftJoin('employe_basic_info','employe_basic_info.employe_basic_info_id','=','salary_structure.employee_basic_info_id')
+        $data['salary_structure'] = SalaryStructureModel::leftJoin('employe_basic_info','employe_basic_info.id','=','salary_structure.employee_basic_info_id')
                         ->leftJoin('branch','branch.branch_id', '=', 'salary_structure.branch_id')
                         ->leftJoin('department','department.department_id', '=', 'salary_structure.department_id')
                         ->leftJoin('designation','designation.designation_id', '=', 'salary_structure.designation_id')
@@ -131,7 +131,7 @@ class SalaryStructureController extends Controller
         $data['designation'] = DesignationModel::get();
         $data['salary_structure_component'] = SalaryStructureComponentModel::where('salary_structure_id',$id)->get();
 
-        $data['salary_structure_data'] = SalaryStructureModel::leftJoin('employe_basic_info','employe_basic_info.employe_basic_info_id','=','salary_structure.employee_basic_info_id')
+        $data['salary_structure_data'] = SalaryStructureModel::leftJoin('employe_basic_info','employe_basic_info.id','=','salary_structure.employee_basic_info_id')
                         ->leftJoin('branch','branch.branch_id', '=', 'salary_structure.branch_id')
                         ->leftJoin('department','department.department_id', '=', 'salary_structure.department_id')
                         ->leftJoin('designation','designation.designation_id', '=', 'salary_structure.designation_id')
@@ -222,7 +222,7 @@ class SalaryStructureController extends Controller
             if ($requested_data['designation_id']) {
                 $query->where('designation_name', $requested_data['designation_id']);
             }
-        })->whereNotIn('employe_basic_info_id',$employee_id)->get();
+        })->whereNotIn('id',$employee_id)->get();
 
         return response()->json($data);
     }

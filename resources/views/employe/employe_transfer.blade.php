@@ -44,7 +44,7 @@
                                 <div class="col-md-8 col-lg-10">
                                     {{Form::text('employe_code','',['class'=>'form-control required employe_code'])}}
 
-                                    {{Form::hidden('employe_basic_info_id','',['class'=>'employe_basic_info_id'])}}
+                                    {{Form::hidden('id','',['class'=>'id'])}}
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -249,7 +249,7 @@
                     $(".previous_branch").val(data.branch_id);
                     $(".previous_department_name").val(data.department_name);
                     $(".previous_department").val(data.department_id);
-                    $(".employe_basic_info_id").val(data.employe_basic_info_id);
+                    $(".id").val(data.id);
                 }
             });
         });

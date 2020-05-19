@@ -40,15 +40,15 @@
                   <img style="width: 50px;" src="{{$employe_report_data->employe_photo}}">
                 </td>
                 <td style="display: inline-flex;">
-                    {{Form::open(['url'=>"add_employe/$employe_report_data->employe_basic_info_id",'method'=>'DELETE'])}}
+                    {{Form::open(['url'=>"add_employe/$employe_report_data->id",'method'=>'DELETE'])}}
                         <button class="btn btn-danger delete"><i class="fas fa-trash" onclick="return confirm('Are You Sure?')"></i></button>
                     {{Form::close()}}
 
-                    {{Form::open(['url'=>"add_employe/$employe_report_data->employe_basic_info_id/edit",'method'=>'GET'])}}
+                    {{Form::open(['url'=>"add_employe/$employe_report_data->id/edit",'method'=>'GET'])}}
                     <button class="btn btn-primary" style="margin: 0px 3px 0px 4px;"><i class="fas fa-edit"></i></button>
                     {{Form::close()}}
 
-                    <button type="button" class="btn btn-success view_bio" data-toggle="modal" data-target="#myModal" value="{{$employe_report_data->employe_basic_info_id}}"><i class="fas fa-vr-cardboard"></i></button>
+                    <button type="button" class="btn btn-success view_bio" data-toggle="modal" data-target="#myModal" value="{{$employe_report_data->id}}"><i class="fas fa-vr-cardboard"></i></button>
                 </td>
               </tr>
               @endforeach

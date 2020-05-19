@@ -5,17 +5,7 @@
     <div class="pcoded-inner-content">
         <!-- Main-body start -->
         <div class="main-body">
-            <div class="page-wrapper">
-                <!-- Page-body start -->
-                @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif         
+            <div class="page-wrapper" id="vue-employee">   
                 <div class="page-body">
                     <div class="row">
                         <div class="col-sm-12">
@@ -25,271 +15,157 @@
                                     <h5>Add New Employee</h5>
                                     <span>Add class of <code>.form-control</code> with <code>&lt;input&gt;</code> tag</span>
                                 </div>
-                                <div class="card-block">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div id="wizard">
-                                                <section>
-                                                    {{Form::open(['url'=>'/add_employe', 'files'=>true,'class'=>'wizard-form','id'=>'example-advanced-form'])}}    
-                                                        <h3> Besis Info </h3>
-                                                        <fieldset style="position: inherit;">
-                                                            <div class="row" id="vue-employee">
-                                                                <div class="col-lg-6">
-                                                                    <div class="form-group row">
-                                                                        <div class="col-md-4 col-lg-2">
-                                                                            <label for="userName-2" class="block">Employee Code *</label>
-                                                                        </div>
-                                                                        <div class="col-md-8 col-lg-10">
-                                                                            {{Form::text('employe_code','',['class'=>'form-control required'])}}
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="form-group row">
-                                                                        <div class="col-md-4 col-lg-2">
-                                                                            <label for="userName-2" class="block">Employee Name *</label>
-                                                                        </div>
-                                                                        <div class="col-md-8 col-lg-10">
-                                                                            {{Form::text('employe_name','',['class'=>'form-control required'])}}
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="form-group row">
-                                                                        <div class="col-md-4 col-lg-2">
-                                                                            <label for="userName-2" class="block">Branch *</label>
-                                                                        </div>
-                                                                        <div class="col-md-8 col-lg-10">
-                                                                            <select name="branch_name" class="form-control" @change="GetDesignation($event.target.value)">
-                                                                                <option value="">Select</option>
-                                                                                @foreach($branch as $branch_data)
-                                                                                <option value="{{$branch_data->branch_id}}">{{$branch_data->branch_name}}</option>
-                                                                                @endforeach
-                                                                            </select>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="form-group row">
-                                                                        <div class="col-md-4 col-lg-2">
-                                                                            <label for="userName-2" class="block">Department *</label>
-                                                                        </div>
-                                                                        <div class="col-md-8 col-lg-10">
-                                                                            <select name="department_name" class="form-control" @change="GetDesignation($event.target.value)">
-                                                                                <option value="">Select</option>
-                                                                                @foreach($department as $department_data)
-                                                                                <option value="{{$department_data->department_id}}">{{$department_data->department_name}}</option>
-                                                                                @endforeach
-                                                                            </select>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="form-group row">
-                                                                        <div class="col-md-4 col-lg-2">
-                                                                            <label for="userName-2" class="block">Designation *</label>
-                                                                        </div>
-                                                                        <div class="col-md-8 col-lg-10">
-                                                                            <select name="designation_name" class="form-control">
-                                                                                <option value="">--select--</option>
-                                                                                <option v-for="data in Designation"  :value="data.designation_id" v-text="data.designation_name"></option>
-                                                                            </select>
-                                                                          <!--   <select name="designation_name" class="form-control">
-                                                                                <option value="">Select</option>
-                                                                                @foreach($designation as $designation_data)
-                                                                                <option value="{{$designation_data->designation_id}}">{{$designation_data->designation_name}}</option>
-                                                                                @endforeach
-                                                                            </select> -->
-                                                                        </div>
-                                                                    </div>
-                                                                    
-                                                                    <div class="form-group row">
-                                                                        <div class="col-md-4 col-lg-2">
-                                                                            <label for="userName-2" class="block">Photo *</label>
-                                                                        </div>
-                                                                        <div class="col-md-8 col-lg-10">
-                                                                            {{Form::file('employe_photo',['class'=>'form-control  required','id'=>'profile-img'])}}
+                                {{Form::open(['url'=>'/add_employe', 'files'=>true])}} 
+                                <div class="card-block row">
+                                    <div class="col-lg-4">
+                                        <div class="form-group">
+                                            <label class="col-sm-12 col-form-label">Employee Name</label>
+                                            <div class="col-sm-12">
+                                                {{Form::text('employe_name','',['class'=>'form-control required','placeholder'=>'Employee Name'])}}
+                                                
+                                                <font class="text-danger">{{$errors->first('employe_name')}}</font>
+                                            </div>
+                                        </div>
 
-                                                                             <img src=""  onerror="this.src='{{asset('backend_asset/images/avatar_image.png')}}';" id="profile-img-tag" style="width: 200px;margin-top: 20px;" />      
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-lg-6">
-                                                                    <div class="form-group row">
-                                                                        <div class="col-md-4 col-lg-2">
-                                                                            <label for="userName-2" class="block">Father Name *</label>
-                                                                        </div>
-                                                                        <div class="col-md-8 col-lg-10">
-                                                                            {{Form::text('father_name','',['class'=>'form-control required'])}}
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="form-group row">
-                                                                        <div class="col-md-4 col-lg-2">
-                                                                            <label for="userName-2" class="block">Mother Name *</label>
-                                                                        </div>
-                                                                        <div class="col-md-8 col-lg-10">
-                                                                            {{Form::text('mother_name','',['class'=>'form-control required'])}}
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="form-group row">
-                                                                        <div class="col-md-4 col-lg-2">
-                                                                            <label for="userName-2" class="block">Date Of Birth *</label>
-                                                                        </div>
-                                                                        <div class="col-md-8 col-lg-10">
-                                                                            {{Form::date('date_of_birth','',['class'=>'form-control required'])}}
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="form-group row">
-                                                                        <div class="col-md-4 col-lg-2">
-                                                                            <label for="userName-2" class="block">National ID *</label>
-                                                                        </div>
-                                                                        <div class="col-md-8 col-lg-10">
-                                                                            {{Form::text('national_id','',['class'=>'form-control required'])}}
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="form-group row">
-                                                                        <div class="col-md-4 col-lg-2">
-                                                                            <label for="userName-2" class="block">Nationality *</label>
-                                                                        </div>
-                                                                        <div class="col-md-8 col-lg-10">
-                                                                            {{Form::select('nationality',[''=>'Select','Bangladeshi'=>'Bangladeshi'],null,['class'=>'form-control'])}}
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="form-group row">
-                                                                        <div class="col-md-4 col-lg-2">
-                                                                            <label for="userName-2" class="block">Gender *</label>
-                                                                        </div>
-                                                                        <div class="col-md-8 col-lg-10">
-                                                                            {{Form::select('employe_gender',[''=>'Select','Male'=>'Male','Female'=>'Female'],null,['class'=>'form-control'])}}
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="form-group row">
-                                                                        <div class="col-md-4 col-lg-2">
-                                                                            <label for="userName-2" class="block">Blood Group *</label>
-                                                                        </div>
-                                                                        <div class="col-md-8 col-lg-10">
-                                                                            {{Form::select('blood_group',[''=>'Select','A+'=>'A+','A-'=>'A-','B+'=>'B+','O+'=>'O+','O-'=>'O-'],null,['class'=>'form-control'])}}
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="form-group row">
-                                                                        <div class="col-md-4 col-lg-2">
-                                                                            <label for="userName-2" class="block">Religion *</label>
-                                                                        </div>
-                                                                        <div class="col-md-8 col-lg-10">
-                                                                            {{Form::select('religion',[''=>'Select','Islam'=>'Islam'],null,['class'=>'form-control'])}}
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="form-group row">
-                                                                        <div class="col-md-4 col-lg-2">
-                                                                            <label for="userName-2" class="block">Marital status *</label>
-                                                                        </div>
-                                                                        <div class="col-md-8 col-lg-10">
-                                                                            {{Form::select('merital_statas',[''=>'Select','Married'=>'Married','Single'=>'Single'],null,['class'=>'form-control'])}}
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </fieldset>
-                                                        <h3> Contact Info </h3>
-                                                        <fieldset style="position: inherit;">
-                                                           <div class="form-group row">
-                                                                <div class="col-md-4 col-lg-2">
-                                                                    <label for="userName-2" class="block">Phone Number *</label>
-                                                                </div>
-                                                                <div class="col-md-8 col-lg-10">
-                                                                    {{Form::text('phone_number','',['class'=>'form-control required'])}}
-                                                                </div>
-                                                            </div>
-                                                           <div class="form-group row">
-                                                                <div class="col-md-4 col-lg-2">
-                                                                    <label for="userName-2" class="block">Email *</label>
-                                                                </div>
-                                                                <div class="col-md-8 col-lg-10">
-                                                                    {{Form::email('email','',['class'=>'form-control required'])}}
-                                                                </div>
-                                                            </div>
-                                                           <div class="form-group row">
-                                                                <div class="col-md-4 col-lg-2">
-                                                                    <label for="userName-2" class="block">Present Address *</label>
-                                                                </div>
-                                                                <div class="col-md-8 col-lg-10">
-                                                                    {{Form::textarea('present_address','',['class'=>'form-control required'])}}
-                                                                </div>
-                                                            </div>
-                                                           <div class="form-group row">
-                                                                <div class="col-md-4 col-lg-2">
-                                                                    <label for="userName-2" class="block">Parmanent Address *</label>
-                                                                </div>
-                                                                <div class="col-md-8 col-lg-10">
-                                                                    {{Form::textarea('parmanent_address','',['class'=>'form-control required'])}}
-                                                                </div>
-                                                            </div>
-                                                            <span style="margin: 15px;" class="text-center"><h3>Banking Info</h3></span>
-                                                           <div class="form-group row">
-                                                                <div class="col-md-4 col-lg-2">
-                                                                    <label for="userName-2" class="block">Account Number *</label>
-                                                                </div>
-                                                                <div class="col-md-8 col-lg-10">
-                                                                    {{Form::text('bank_account_number','',['class'=>'form-control required'])}}
-                                                                </div>
-                                                            </div>
-                                                           <div class="form-group row">
-                                                                <div class="col-md-4 col-lg-2">
-                                                                    <label for="userName-2" class="block">Bank Name *</label>
-                                                                </div>
-                                                                <div class="col-md-8 col-lg-10">
-                                                                    {{Form::text('bank_name','',['class'=>'form-control required'])}}
-                                                                </div>
-                                                            </div>
-                                                           <div class="form-group row">
-                                                                <div class="col-md-4 col-lg-2">
-                                                                    <label for="userName-2" class="block">Branch Name *</label>
-                                                                </div>
-                                                                <div class="col-md-8 col-lg-10">
-                                                                    {{Form::text('bank_Branch_name','',['class'=>'form-control required'])}}
-                                                                </div>
-                                                            </div>
-                                                        </fieldset>
-                                                        <h3> Joining Info </h3>
-                                                        <fieldset style="position: inherit;">
-                                                            
-                                                            <div class="form-group row">
-                                                                <div class="col-md-4 col-lg-2">
-                                                                    <label for="userName-2" class="block">Offer Date *</label>
-                                                                </div>
-                                                                <div class="col-md-8 col-lg-10">
-                                                                    {{Form::date('offer_date','',['class'=>'form-control required'])}}
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group row">
-                                                                <div class="col-md-4 col-lg-2">
-                                                                    <label for="userName-2" class="block">Confirmation Date *</label>
-                                                                </div>
-                                                                <div class="col-md-8 col-lg-10">
-                                                                    {{Form::date('confirmation_date','',['class'=>'form-control required'])}}
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group row">
-                                                                <div class="col-md-4 col-lg-2">
-                                                                    <label for="userName-2" class="block">Date Of Joining *</label>
-                                                                </div>
-                                                                <div class="col-md-8 col-lg-10">
-                                                                    {{Form::date('joining_date','',['class'=>'form-control required'])}}
-                                                                </div>
-                                                            </div>
-                                                        </fieldset>
-                                                        <h3> Personal Bio </h3>
-                                                        <fieldset style="position: inherit;">
-                                                            <div class="form-group row">
-                                                                <div class="col-md-4 col-lg-2">
-                                                                    <label for="userName-2" class="block">CV *</label>
-                                                                </div>
-                                                                <div class="col-md-8 col-lg-10">
-                                                                    {{Form::file('cv',['class'=>'form-control required'])}}
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group row">
-                                                                <button class="btn btn-success" style="margin: 50px 0px 0px 500px;">Submit</button>
-                                                            </div>
-                                                        </fieldset>
-                                                    {{Form::close()}}
-                                                </section>
+                                        <div class="form-group">
+                                            <label class="col-sm-12 col-form-label">Branch Name</label>
+                                            <div class="col-sm-12">
+                                                @php
+                                                    $branch_array = [];
+                                                    $branch_array[''] = "--select--";
+                                                @endphp
+
+                                                @foreach($branch as $key => $branch_data)
+                                                    @php $branch_array[$branch_data->branch_id] = $branch_data->branch_name; @endphp
+                                                @endforeach
+
+                                                {{Form::select('branch_name',$branch_array,'null',['class'=>'form-control'])}}
+                                                
+                                                <font class="text-danger">{{$errors->first('branch_name')}}</font>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-12 col-form-label">Department Name</label>
+                                            <div class="col-sm-12">
+                                                @php
+                                                    $department_array = [];
+                                                    $department_array[''] = "--select--";
+                                                @endphp
+
+                                                @foreach($department as $key => $department_data)
+                                                    @php $department_array[$department_data->department_id] = $department_data->department_name; @endphp
+                                                @endforeach
+
+                                                {{Form::select('department_name',$department_array,'null',['class'=>'form-control','v-model'=>'department_name','v-on:change'=>'GetDesignation'])}}
+                                                
+                                                <font class="text-danger">{{$errors->first('department_name')}}</font>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-12 col-form-label">Designation Name</label>
+                                            <div class="col-sm-12">
+                                                <select id="designation_name" name="designation_name" class="form-control">
+                                                    <option value="">--select--</option>
+                                                    <option v-for="data in Designation"  :value="data.designation_id" v-text="data.designation_name"></option>
+                                                </select>
+                                                
+                                                <font class="text-danger">{{$errors->first('designation_name')}}</font>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+
+
+                                        <div class="form-group">
+                                            <label class="col-sm-12 col-form-label">Employee ID</label>
+                                            <div class="col-sm-12">
+
+                                                {{Form::text('employe_code','',['class'=>'form-control required','placeholder'=>'Employee ID'])}}
+
+                                                
+                                                <font class="text-danger">{{$errors->first('employe_code')}}</font>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <label class="col-sm-12 col-form-label">Date of Birth</label>
+                                            <div class="col-sm-12">
+                                                {{Form::date('date_of_birth','',['class'=>'form-control required'])}}
+                                                
+                                                <font class="text-danger">{{$errors->first('date_of_birth')}}</font>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <label class="col-sm-12 col-form-label">Joining Date</label>
+                                            <div class="col-sm-12">
+                                                {{Form::date('joining_date','',['class'=>'form-control required'])}}
+                                                
+                                                <font class="text-danger">{{$errors->first('joining_date')}}</font>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-12 col-form-label">Gender</label>
+                                            <div class="col-sm-12">
+                                                {{Form::select('gender',['1'=>'Male','2'=>'Female'],'null',['class'=>'form-control'])}}
+                                                
+                                                <font class="text-danger">{{$errors->first('gender')}}</font>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col-lg-4">
+
+                                        <div class="form-group">
+                                            <label class="col-sm-12 col-form-label">Phone</label>
+                                            <div class="col-sm-12">
+                                                {{Form::text('phone','',['class'=>'form-control required','placeholder'=>'Phone'])}}
+                                                
+                                                <font class="text-danger">{{$errors->first('phone')}}</font>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <label class="col-sm-12 col-form-label">Email</label>
+                                            <div class="col-sm-12">
+                                                {{Form::email('email','',['class'=>'form-control required','placeholder'=>'Email'])}}
+                                                
+                                                <font class="text-danger">{{$errors->first('email')}}</font>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-12 col-form-label">Password</label>
+                                            <div class="col-sm-12">
+                                                {{Form::password('password',['class'=>'form-control required','placeholder'=>'Password'])}}
+                                                
+                                                <font class="text-danger">{{$errors->first('password')}}</font>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-12 col-form-label">Confirm Password</label>
+                                            <div class="col-sm-12">
+                                                {{Form::password('password_confirmation',['class'=>'form-control required','placeholder'=>'Confirm Password'])}}
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="card-block row">
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <div class="col-sm-12">
+                                                <button class="btn btn-info btn-sm">Sumbit</button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                                {{Form::close()}}
                             </div>
                             <!-- Form wizard with validation card end -->
                         </div>
@@ -330,14 +206,13 @@
                 csrf_token : token,
                 baseUrl : baseUrl,
                 Designation : [],
+                department_name : '',
             },
             methods : {
-                GetDesignation : function (id){
-                    alert(id);
-                    console.log("ok");
+                GetDesignation : function (){
                     const _this = this;
                     $.ajax({
-                        url : _this.baseUrl + '/salary_slip/'+ id,
+                        url : _this.baseUrl + '/salary_slip/'+ _this.department_name,
                         type : 'get',
                         success : function (response){
                             _this.Designation = response;

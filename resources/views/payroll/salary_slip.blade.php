@@ -263,7 +263,12 @@
                             data : _this.formData,
                         },
                         success : function(response){
-                            _this.GetSalarySlipData();
+                            if (response.count == 0) {
+                                Toster('error', 'Already Paid For this month');
+                            }else{
+                                _this.GetSalarySlipData();
+                                Toster('success', response.count +' Of Employees Payment Successfully Completed');
+                            }
                         }
                     })                
                 },

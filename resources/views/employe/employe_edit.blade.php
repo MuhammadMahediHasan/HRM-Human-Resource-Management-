@@ -36,7 +36,7 @@
                                         <div class="col-md-12">
                                             <div id="wizard">
                                                 <section>
-                                                    {{Form::open(['url'=>"/add_employe/$employe_data->employe_basic_info_id",'files'=>true,'method'=>'put','class'=>'wizard-form','id'=>'example-advanced-form'])}}    
+                                                    {{Form::open(['url'=>"/add_employe/$employe_data->id",'files'=>true,'method'=>'put','class'=>'wizard-form','id'=>'example-advanced-form'])}}    
                                                         <h3> Besis Info </h3>
                                                         <fieldset style="position: inherit;">
                                                             <div class="form-group row">

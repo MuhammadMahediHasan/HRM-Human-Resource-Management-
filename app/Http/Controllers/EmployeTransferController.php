@@ -24,7 +24,7 @@ class EmployeTransferController extends Controller
         $branch=BranchModel::where('branch_status','Active')->get();
         $department=DepartmentModel::where('department_status','Active')->get();
 
-        $employe_transfer=EmployeTransferModel::join('employe_basic_info','employe_transfer.employe_basic_info_id','=','employe_basic_info.employe_basic_info_id')->get();
+        $employe_transfer=EmployeTransferModel::join('employe_basic_info','employe_transfer.id','=','employe_basic_info.id')->get();
         return view('employe.employe_transfer',['branch'=>$branch,'department'=>$department,'employe_transfer'=>$employe_transfer]);
     }
 
@@ -56,7 +56,7 @@ class EmployeTransferController extends Controller
         {
             $employe_transfer_data->fill($request->all())->save();
             // return back();
-            $id=$request->employe_basic_info_id;
+            $id=$request->id;
             $employe_basic_info=EmployeModel::findOrFail($id);
             $employe_basic_info->update(['branch_name'=>$request->present_branch]);
             $employe_basic_info->update(['department_name'=>$request->present_department]);

@@ -6,10 +6,27 @@ use Illuminate\Database\Eloquent\Model;
 
 class EmployeModel extends Model
 {
-    protected $table='employe_basic_info';
-    protected $primaryKey='employe_basic_info_id';
-    protected $fillable=['employe_code','employe_name','branch_name','department_name','designation_name','father_name','mother_name','date_of_birth','national_id','nationality','employe_gender','blood_group','religion','merital_statas','employe_photo',];
+    protected $table='users';
+    protected $primaryKey='id';
+    protected $fillable=['employe_code','employe_name','branch_name','department_name','designation_name','date_of_birth','joining_date','gender','phone','email','password'];
 
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'password', 'remember_token',
+    ];
+
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+    ];
 
     public function validation()
     {
@@ -19,16 +36,12 @@ class EmployeModel extends Model
     		"branch_name"=>'required',
     		"department_name"=>'required',
     		"designation_name"=>'required',
-    		"father_name"=>'required',
-    		"mother_name"=>'required',
     		"date_of_birth"=>'required',
-    		"national_id"=>'required',
-    		"nationality"=>'required',
-            "employe_gender"=>'required',
-    		"blood_group"=>'required',
-    		"religion"=>'required',
-    		"merital_statas"=>'required',
-    		"employe_photo"=>'required',
+            "joining_date"=>'required',
+            "gender"=>'required',
+            "phone"=>'required',
+            "email"=>'required|email|unique:users',
+            "password"=>'required|confirmed',
     	];
     }
 }

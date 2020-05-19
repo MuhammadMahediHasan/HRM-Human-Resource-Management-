@@ -47,23 +47,23 @@ class AttendenceController extends Controller
 
         $attendence_parent_id=$attendence_parent->attendence_parent_id;
 
-        if (!$request->employe_basic_info_id=[]) 
+        if (!$request->id=[]) 
         {
-            foreach ($request->employe_basic_info_id as $key => $attendence_value) 
+            foreach ($request->id as $key => $attendence_value) 
             {
                 $attendence_child=new AttendenceChildModel;
                 $attendence_child->attendence_parent_id=$attendence_parent_id;
-                $attendence_child->employe_basic_info_id=$attendence_value;
+                $attendence_child->id=$attendence_value;
                 $attendence_child->attendence_child_status="Present";
                 $attendence_child->save();
             }
 
-            $absent=EmployeModel::where('department_name',$request->department)->whereNotIn('employe_basic_info_id',$request->employe_basic_info_id)->get();
+            $absent=EmployeModel::where('department_name',$request->department)->whereNotIn('id',$request->id)->get();
             foreach ($absent as $key => $absent_value) 
             {
                 $attendence_child=new AttendenceChildModel;
                 $attendence_child->attendence_parent_id=$attendence_parent_id;
-                $attendence_child->employe_basic_info_id=$absent_value->employe_basic_info_id;
+                $attendence_child->id=$absent_value->id;
                 $attendence_child->attendence_child_status="Absent";
                 $attendence_child->save();
             }

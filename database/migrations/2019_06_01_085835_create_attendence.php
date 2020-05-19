@@ -24,7 +24,7 @@ class CreateAttendence extends Migration
         Schema::create('attendence_child', function (Blueprint $table) {
             $table->bigIncrements('attendence_child_id');
             $table->string('attendence_parent_id');
-            $table->string('employe_basic_info_id');
+            $table->string('id');
             $table->string('attendence_child_status');
             $table->timestamps();
         });

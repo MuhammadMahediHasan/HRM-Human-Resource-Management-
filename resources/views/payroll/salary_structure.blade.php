@@ -54,7 +54,7 @@
                                                 @endforeach
 
                                                 {{Form::select('branch_id',$branch_array,'null',['class'=>'form-control','v-model'=>'formData.branch_id'])}}
-                                                <br>
+                                                
                                                 <font class="text-danger">{{$errors->first('branch_id')}}</font>
                                             </div>
                                         </div>
@@ -72,7 +72,7 @@
                                                 @endforeach
 
                                                 {{Form::select('department_id',$department_array,'null',['class'=>'form-control','v-model'=>'formData.department_id','v-on:change'=>'GetDesignation'])}}
-                                                <br>
+                                                
                                                 <font class="text-danger">{{$errors->first('department_id')}}</font>
                                             </div>
                                         </div>
@@ -86,7 +86,7 @@
                                                     <option v-for="data in Designation" :value="data.designation_id" v-text="data.designation_name"></option>
                                                 </select>
 
-                                                <br>
+                                                
                                                 <font class="text-danger">{{$errors->first('designation_id')}}</font>
                                             </div>
                                         </div>
@@ -96,9 +96,9 @@
                                             <div class="col-sm-8">
                                                 <select id="chkveg" name="employee_basic_info_id[]" multiple="multiple" class="form-control">
                                                     <!-- <option value="">--select above fields--</option> -->
-                                                    <option v-for="data in Employees" :value="data.employe_basic_info_id" v-text="data.employe_name"></option>
+                                                    <option v-for="data in Employees" :value="data.id" v-text="data.employe_name"></option>
                                                 </select>
-                                                <br>
+                                                
                                                 <font class="text-danger">{{$errors->first('employee_basic_info_id')}}</font>
                                             </div>
                                         </div>
@@ -106,7 +106,7 @@
                                             <label class="col-sm-4 col-form-label">Payroll Frequency</label>
                                             <div class="col-sm-8">
                                                 {{Form::select('payroll_frequency',['Monthly'=>'Monthly','Weekly'=>'Weekly','Daily'=>'Daily'],'null',['class'=>'form-control'])}}
-                                                <br>
+                                                
                                                 <font class="text-danger">{{$errors->first('payroll_frequency')}}</font>
                                             </div>
                                         </div>

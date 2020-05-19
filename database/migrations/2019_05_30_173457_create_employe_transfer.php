@@ -15,7 +15,7 @@ class CreateEmployeTransfer extends Migration
     {
         Schema::create('employe_transfer', function (Blueprint $table) {
             $table->bigIncrements('employe_transfer_id');
-            $table->string('employe_basic_info_id');
+            $table->string('id');
             $table->string('issue_date');
             $table->string('previous_branch');
             $table->string('previous_department');
