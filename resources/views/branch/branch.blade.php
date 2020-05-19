@@ -7,25 +7,17 @@
         <div class="row align-items-end">
             <div class="col-lg-8">
                 <div class="page-header-title">
-
-
-
-@if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif         
-
-<link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
-<script src="http://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
-<script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>  
-        {!! Toastr::message() !!}       
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif              
                     <!-- Trigger the modal with a button -->
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Create New Branch</button>
+                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">Create New Branch</button>
 
                     <!-- Modal -->
                     <div id="myModal" class="modal fade" role="dialog">
@@ -95,7 +87,7 @@
                                 </div>
                                 <div class="card-block">
                                     <div class="dt-responsive table-responsive">
-                                        <table id="order-table" class="table table-striped table-bordered nowrap">
+                                        <table id="order-table" class="custom_table table-striped table-bordered nowrap">
                                             <thead>
                                                 <tr>
                                                     <th>#</th>
@@ -106,7 +98,7 @@
                                             </thead>
                                             <tbody>
                                                 @foreach($branch as $key=> $branch_data)
-                                                <tr>
+                                                <tr class="action_table_row">
                                                     <td>{{$key+1}}</td>
                                                     <td>{{$branch_data->branch_name}}</td>
                                                     <td>
@@ -117,20 +109,24 @@
                                                         @endif
                                                         
                                                     </td>
-                                                    <td style="display: inline-flex;">
+                                                    <td class="action">
                                                         {{Form::open(['url'=>"branch/$branch_data->branch_id",'method'=>'DELETE'])}}
-                                                            <button class="btn btn-danger"><i class="fas fa-trash" onclick="return confirm('Are You Sure?')"></i></button>
+                                                        <button class="btn btn-link"><i class="fas fa-trash text-danger" onclick="return confirm('Are You Sure?')"></i></button>
+                                                            
                                                         {{Form::close()}}
 
                                                         {{Form::open(['url'=>"branch/$branch_data->branch_id/edit",'method'=>'GET'])}}
-                                                        <button class="btn btn-primary"><i class="fas fa-edit"></i></button>
+                                                        <button class="btn btn-link"><i class="fas fa-edit text-primary"></i></button>
+                                                        
                                                         {{Form::close()}}
 
                                                         {{Form::open(['url'=>"branch/$branch_data->branch_id",'method'=>'GET'])}}
                                                             @if($branch_data->branch_status=='Inactive')
-                                                            <button class="btn btn-success"><i class="fas fa-check"></i></button>
+                                                        <button class="btn btn-link"><i class="fas fa-check text-succes"></i></button>
+                                                            
                                                             @else
-                                                            <button class="btn btn-warning"><i class="fas fa-times"></i></button>
+                                                        <button class="btn btn-link"><i class="fas fa-times text-warning"></i></button>
+                                                            
                                                             @endif
                                                         {{Form::close()}}
                                                     </td>

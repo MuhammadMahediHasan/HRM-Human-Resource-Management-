@@ -7,21 +7,15 @@
         <div class="row align-items-end">
             <div class="col-lg-8">
                 <div class="page-header-title">
-@if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif         
-
-<link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
-<script src="http://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
-<script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>  
-        {!! Toastr::message() !!}  
-
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif         
                     <!-- Trigger the modal with a button -->
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Add Leave Type</button>
 

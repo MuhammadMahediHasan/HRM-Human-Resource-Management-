@@ -7,20 +7,15 @@
         <div class="row align-items-end">
             <div class="col-lg-8">
                 <div class="page-header-title">
-@if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif         
-
-<link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
-<script src="http://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
-<script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>  
-        {!! Toastr::message() !!} 
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif         
                     <!-- Trigger the modal with a button -->
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Add New Leave</button>
 
@@ -161,9 +156,9 @@
                                                             <span style="color: red;"><i class="fas fa-times-circle"></i>{{$leave_data->leave_status}}</span>
                                                         @endif
                                                     </td>
-                                                    <td style="display: inline-flex;">
+                                                    <td class="action">
                                                         {{Form::open(['url'=>"leave/$leave_data->leave_id",'method'=>'DELETE'])}}
-                                                            <button class="btn btn-danger"><i class="fas fa-trash" onclick="return confirm('Are You Sure?')"></i></button>
+                                                            <button class="btn-sm btn-danger"><i class="fas fa-trash" onclick="return confirm('Are You Sure?')"></i></button>
                                                         {{Form::close()}}
 
                                                         {{Form::open(['url'=>"leave/$leave_data->leave_id/edit",'method'=>'GET'])}}
@@ -172,9 +167,9 @@
 
                                                         {{Form::open(['url'=>"leave/$leave_data->leave_id",'method'=>'GET'])}}
                                                             @if($leave_data->leave_status=='Inactive')
-                                                            <button class="btn btn-success"><i class="fas fa-check"></i></button>
+                                                            <button class="btn-sm btn-success"><i class="fas fa-check"></i></button>
                                                             @else
-                                                            <button class="btn btn-warning"><i class="fas fa-times"></i></button>
+                                                            <button class="btn-sm btn-warning"><i class="fas fa-times"></i></button>
                                                             @endif
                                                         {{Form::close()}}
                                                     </td>

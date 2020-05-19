@@ -36,7 +36,7 @@
                                     </div>
                                 </div>
                             </li>
-                            <li>
+                            <li class="header-fullscreen">
                                 <a href="#!" onclick="if (!window.__cfRLUnblockHandlers) return false; javascript:toggleFullScreen()" class="waves-effect waves-light" data-cf-modified-0e7db4e1565a985257738729-="">
                                 <i class="full-screen feather icon-maximize"></i>
                             </a>
@@ -98,9 +98,16 @@
                             <li class="user-profile header-notification">
 
                                 <div class="dropdown-primary dropdown">
+                                    @php
+                                        $user = auth()->user();
+                                    @endphp
                                     <div class="dropdown-toggle" data-toggle="dropdown">
+                                        @if($user->image)
+                                        <img src="{{$user->image}}" class="img-radius" alt="User-Profile-Image">
+                                        @else
                                         <img src="https://colorlib.com//polygon/admindek/files/assets/images/avatar-4.jpg" class="img-radius" alt="User-Profile-Image">
-                                        <span>John Doe</span>
+                                        @endif
+                                        <span>{{ $user->name }}</span>
                                         <i class="feather icon-chevron-down"></i>
                                     </div>
                                     <ul class="show-notification profile-notification dropdown-menu" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">

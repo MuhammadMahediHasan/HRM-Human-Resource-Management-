@@ -25,9 +25,9 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Quicksand:500,700" rel="stylesheet">
     <!-- Required Fremwork -->
-    <link rel="stylesheet" type="text/css" href="https://colorlib.com//polygon/admindek/files/bower_components/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="{{asset('backend_asset/css/bootstrap.min.css')}}">
     <!-- waves.css -->
-    <link rel="stylesheet" href="https://colorlib.com//polygon/admindek/files/assets/pages/waves/css/waves.min.css" type="text/css" media="all">
+    <link rel="stylesheet" href="{{asset('backend_asset/css/waves.min.css')}}" type="text/css" media="all">
     <!-- feather icon -->
     <link rel="stylesheet" type="text/css" href="https://colorlib.com//polygon/admindek/files/assets/icon/feather/css/feather.css">
     <!-- themify-icons line icon -->
@@ -39,17 +39,19 @@
     
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <!-- Data Table Css -->
-    <link rel="stylesheet" type="text/css" href="https://colorlib.com//polygon/admindek/files/bower_components/datatables.net-bs4/css/dataTables.bootstrap4.min.css">
-    <link rel="stylesheet" type="text/css" href="https://colorlib.com//polygon/admindek/files/assets/pages/data-table/css/buttons.dataTables.min.css">
-    <link rel="stylesheet" type="text/css" href="https://colorlib.com//polygon/admindek/files/bower_components/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" type="text/css" href="{{asset('backend_asset/css/dataTables.bootstrap4.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('backend_asset/css/buttons.dataTables.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('backend_asset/css/responsive.bootstrap4.min.css')}}">
     <!-- Style.css -->
-    <link rel="stylesheet" type="text/css" href="https://colorlib.com//polygon/admindek/files/assets/css/style.css">
-    <link rel="stylesheet" type="text/css" href="https://colorlib.com//polygon/admindek/files/assets/css/pages.css">
+    <link rel="stylesheet" type="text/css" href="{{asset('backend_asset/css/style.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('backend_asset/css/pages.css')}}">
     <!-- Chartlist chart css -->
-    <link rel="stylesheet" href="https://colorlib.com//polygon/admindek/files/bower_components/chartist/css/chartist.css" type="text/css" media="all">
-      <!--forms-wizard css-->
-      <link rel="stylesheet" type="text/css" href="https://colorlib.com//polygon/admindek/files/bower_components/jquery.steps/css/jquery.steps.css">
-      <!-- Style.css -->
-      <link rel="stylesheet" type="text/css" href="https://colorlib.com//polygon/admindek/files/assets/css/style.css">
+    <link rel="stylesheet" href="{{asset('backend_asset/css/chartist.css')}}" type="text/css" media="all">
+    <!--forms-wizard css-->
+    <link rel="stylesheet" type="text/css" href="{{asset('backend_asset/css/jquery.steps.css')}}">
+    <!-- Style.css -->
+    <!-- <link rel="stylesheet" type="text/css" href="{{asset('backend_asset/css/style1.css')}}"> -->
+    <link rel="stylesheet" type="text/css" href="{{asset('backend_asset/custom_style.css')}}">
+    <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
 
 </head>

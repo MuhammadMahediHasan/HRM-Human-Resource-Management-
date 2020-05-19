@@ -1,0 +1,52 @@
+.action_table_row i {
+    padding-right: 10px;
+    cursor: pointer;
+}
+
+.custom_table {
+    width: 100%
+}
+
+.custom_table .action {
+    display: inline-flex;
+}
+
+.custom_table .action .btn {
+    padding: 5px;
+}
+
+.custom_table tr td {
+    padding-left: 5px;
+}
+
+.custom_table thead tr {
+    height : 35px;
+}
+
+.custom_table tfoot tr {
+    height : 35px;
+}
+
+.navbar {
+    max-height: 55px !important;
+}
+
+.header-navbar .navbar-wrapper .header-search .main-search {
+    padding: 14px 0;
+}
+
+.header-fullscreen {
+    margin-top: -7px;
+}
+
+.nav-right li {
+    margin-top: 3px;
+}
+
+.page-header.card {
+    margin: 15px 35px 5px;
+}
+
+.pcoded .pcoded-navbar .pcoded-item .pcoded-hasmenu .pcoded-submenu li>a {
+    font-size: 12px;
+}

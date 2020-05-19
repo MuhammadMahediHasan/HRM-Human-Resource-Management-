@@ -7,23 +7,17 @@
         <div class="row align-items-end">
             <div class="col-lg-8">
                 <div class="page-header-title">
-
-@if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif         
-
-<link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
-<script src="http://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
-<script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>  
-        {!! Toastr::message() !!}   
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif         
                     <!-- Trigger the modal with a button -->
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Add Department</button>
+                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">Add Department</button>
 
                     <!-- Modal -->
                     <div id="myModal" class="modal fade" role="dialog">
@@ -97,7 +91,7 @@
                                 </div>
                                 <div class="card-block">
                                     <div class="dt-responsive table-responsive">
-                                        <table id="order-table" class="table table-striped table-bordered nowrap">
+                                        <table id="order-table" class="custom_table table-striped table-bordered nowrap">
                                             <thead>
                                                 <tr>
                                                     <th>#</th>
@@ -119,20 +113,20 @@
                                                         @endif
                                                         
                                                     </td>
-                                                    <td style="display: inline-flex;">
+                                                    <td class="action">
                                                         {{Form::open(['url'=>"department/$department_data->department_id",'method'=>'DELETE'])}}
-                                                            <button class="btn btn-danger"><i class="fas fa-trash" onclick="return confirm('Are You Sure?')"></i></button>
+                                                            <button class="btn btn-link text-danger"><i class="fas fa-trash" onclick="return confirm('Are You Sure?')"></i></button>
                                                         {{Form::close()}}
 
                                                         {{Form::open(['url'=>"department/$department_data->department_id/edit",'method'=>'GET'])}}
-                                                        <button class="btn btn-primary"><i class="fas fa-edit"></i></button>
+                                                        <button class="btn btn-link text-primary"><i class="fas fa-edit"></i></button>
                                                         {{Form::close()}}
 
                                                         {{Form::open(['url'=>"department/$department_data->department_id",'method'=>'GET'])}}
                                                             @if($department_data->department_status=='Inactive')
-                                                            <button class="btn btn-success"><i class="fas fa-check"></i></button>
+                                                            <button class="btn btn-link text-success"><i class="fas fa-check"></i></button>
                                                             @else
-                                                            <button class="btn btn-warning"><i class="fas fa-times"></i></button>
+                                                            <button class="btn btn-link text-warning"><i class="fas fa-times"></i></button>
                                                             @endif
                                                         {{Form::close()}}
                                                     </td>
