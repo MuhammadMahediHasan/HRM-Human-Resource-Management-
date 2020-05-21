@@ -17,14 +17,14 @@
                         </div>
                     @endif         
                     <!-- Trigger the modal with a button -->
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Add New Leave</button>
+                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">Add New Leave</button>
 
                     <!-- Modal -->
                     <div id="myModal" class="modal fade" role="dialog">
                       <div class="modal-dialog">
 
                         <!-- Modal content-->
-                        <div class="modal-content" style="width: 150%;margin-left: -20%;">
+                        <div class="modal-content">
                           <div class="modal-header">
                             <h4 class="modal-title">Add New Leave</h4>
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -63,7 +63,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-4 col-form-label">Leave Reason</label>
                                 <div class="col-sm-8">
-                                    {{Form::textarea('leave_reason','',['class'=>'Form-control required'])}}
+                                    {{Form::textarea('leave_reason','',['class'=>'form-control required','rows'=>3,'placeholder'=>'Leave Reason'])}}
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -73,13 +73,12 @@
                                 </div>
                             </div>
                           </div>
-                          <center>
-                              <button class="btn btn-success">Submit</button>
-                          </center>
-                          {{Form::close()}}
+                          
                           <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button class="btn btn-success btn-sm">Submit</button>
+                            <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
                           </div>
+                          {{Form::close()}}
                         </div>
 
                       </div>
@@ -92,10 +91,10 @@
                         <li class="breadcrumb-item">
                             <a href="index-2.html"><i class="feather icon-home"></i></a>
                         </li>
-                        <li class="breadcrumb-item"><a href="#!">Bootstrap Table</a>
+                        <li class="breadcrumb-item"><a href="#">Leave</a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="#!">Basic Initialization</a>
+                            <a href="/leave">Add Employee Leave</a>
                         </li>
                     </ul>
                 </div>
@@ -117,12 +116,12 @@
                             <!-- Default ordering table start -->
                             <div class="card">
                                 <div class="card-header">
-                                    <h5>Default Ordering</h5>
+                                    <h5>Leave Type</h5>
                                     <span>Lets say you want to sort the fourth column (3) descending and the first column (0) ascending: your order: would look like this: order: [[ 3, 'desc' ], [ 0, 'asc' ]]</span>
                                 </div>
                                 <div class="card-block">
                                     <div class="dt-responsive table-responsive">
-                                        <table id="order-table" class="table table-striped table-bordered nowrap">
+                                        <table id="order-table" class="custom_table table-striped table-bordered nowrap">
                                             <thead>
                                                 <tr>
                                                     <th>#</th>
@@ -137,7 +136,7 @@
                                             </thead>
                                             <tbody>
                                                 @foreach($leave as $key=> $leave_data)
-                                                <tr>
+                                                <tr class="action_table_row">
                                                     <td>{{$key+1}}</td>
                                                     <td>{{$leave_data->employe_code}}</td>
                                                     <td>{{$leave_data->leave_type_name}}</td>
@@ -178,6 +177,7 @@
                                             </tbody>
                                             <tfoot>
                                                 <tr>
+                                                    <th>#</th>
                                                     <th>Employee Code</th>
                                                     <th>Leave Type</th>
                                                     <th>Leave From</th>

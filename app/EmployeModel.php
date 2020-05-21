@@ -28,7 +28,7 @@ class EmployeModel extends Model
         'email_verified_at' => 'datetime',
     ];
 
-    public function validation()
+    public function validation($id=0)
     {
     	return [
     		"employe_code"=>'required',
@@ -40,8 +40,8 @@ class EmployeModel extends Model
             "joining_date"=>'required',
             "gender"=>'required',
             "phone"=>'required',
-            "email"=>'required|email|unique:users',
-            "password"=>'required|confirmed',
+            "email"=>'required|email|unique:users,email,'.$id.',id',
+            "password"=> $id==0 ? 'required|confirmed' : '',
     	];
     }
 }

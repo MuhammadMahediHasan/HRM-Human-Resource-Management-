@@ -12,7 +12,7 @@
                 <div class="navbar-wrapper">
                     <div class="navbar-logo">
                         <a href="index-2.html">
-                            <img style="width: 98px;" class="img-fluid" src="{{asset('backend_asset/logo.png')}}"/>
+                            <img style="width: 73px;" class="img-fluid" src="{{asset('backend_asset/logo.png')}}"/>
                         </a>
                         <a class="mobile-menu" id="mobile-collapse" href="#!">
                             <i class="feather icon-menu icon-toggle-right"></i>

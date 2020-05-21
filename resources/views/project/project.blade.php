@@ -15,9 +15,9 @@
                                 @endforeach
                             </ul>
                         </div>
-                    @endif         
+                    @endif              
                     <!-- Trigger the modal with a button -->
-                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">Add Leave Type</button>
+                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">Create New Project</button>
 
                     <!-- Modal -->
                     <div id="myModal" class="modal fade" role="dialog">
@@ -26,34 +26,42 @@
                         <!-- Modal content-->
                         <div class="modal-content">
                           <div class="modal-header">
-                            <h4 class="modal-title">Add Leave type</h4>
+                            <h4 class="modal-title">Project</h4>
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
                           </div>
-                          {{Form::open(['url'=>'/leave_type'])}}
+                          {{Form::open(['url'=>"/project"])}}
                           <div class="modal-body">
                             <div class="form-group row">
-                                <label class="col-sm-4 col-form-label">Leave Type Name</label>
+                                <label class="col-sm-4 col-form-label">Project Name</label>
                                 <div class="col-sm-8">
-                                    {{Form::text('leave_type_name','',['class'=>'form-control required','placeholder'=>'Name'])}}
+                                    {{Form::text('project_name','',['class'=>'form-control','placeholder'=>'Project Name'])}}
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-sm-4 col-form-label">Leave Type Description</label>
+                                <label class="col-sm-4 col-form-label">Description</label>
                                 <div class="col-sm-8">
-                                    {{Form::textarea('leave_type_description','',['class'=>'form-control required','rows'=>3,'placeholder'=>'Description'])}}
+                                    {{Form::textarea('description','',['class'=>'form-control','placeholder'=>'Description','rows'=>3])}}
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-sm-4 col-form-label">Leave Type Status</label>
+                                <label class="col-sm-4 col-form-label">Assign to Team</label>
                                 <div class="col-sm-8">
-                                    {{Form::select('leave_type_status',['Active'=>'Active','Inactive'=>'Inactive'],null,['class'=>'form-control'])}}
+                                    @php
+                                        $team_array = [];
+                                        $team_array[''] = "--select--";
+                                    @endphp
+
+                                    @foreach($team as $key => $team_data)
+                                        @php $team_array[$team_data->team_id] = $team_data->team_name; @endphp
+                                    @endforeach
+
+                                    {{Form::select('project_lead_team_id',$team_array,'null',['class'=>'form-control'])}}
                                 </div>
                             </div>
                           </div>
-
                           <div class="modal-footer">
-                            <button class="btn btn-success btn-sm">Submit</button>
-                            <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+                                <button class="btn btn-success btn-sm">Sumbit</button>
+                                <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
                           </div>
                           {{Form::close()}}
                         </div>
@@ -66,12 +74,9 @@
                 <div class="page-header-breadcrumb">
                     <ul class=" breadcrumb breadcrumb-title">
                         <li class="breadcrumb-item">
-                            <a href="index-2.html"><i class="feather icon-home"></i></a>
+                            <a href="/backend"><i class="feather icon-home"></i></a>
                         </li>
-                        <li class="breadcrumb-item"><a href="#">Leave</a>
-                        </li>
-                        <li class="breadcrumb-item">
-                            <a href="/leave_type">Leave Type</a>
+                        <li class="breadcrumb-item"><a href="/branch">Project</a>
                         </li>
                     </ul>
                 </div>
@@ -87,14 +92,10 @@
                 <div class="page-body">
                     <div class="row">
                         <div class="col-sm-12">
-                            <!-- Zero config.table start -->
-                            
-                            <!-- Zero config.table end -->
-                            <!-- Default ordering table start -->
                             <div class="card">
                                 <div class="card-header">
-                                    <h5>Leave Type</h5>
-                                    <span>Lets say you want to sort the fourth column (3) descending and the first column (0) ascending: your order: would look like this: order: [[ 3, 'desc' ], [ 0, 'asc' ]]</span>
+                                    <h5>Project List</h5>
+                                    <span>Table</span>
                                 </div>
                                 <div class="card-block">
                                     <div class="dt-responsive table-responsive">
@@ -102,41 +103,26 @@
                                             <thead>
                                                 <tr>
                                                     <th>#</th>
-                                                    <th>Leave Type</th>
-                                                    <th>Leave Type Description</th>
-                                                    <th>Status</th>
+                                                    <th>Project Name</th>
+                                                    <th>Working Team</th>
+                                                    <th>Description</th>
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach($leave_type as $key=> $leave_type_data)
+                                                @foreach($project as $key=> $project_data)
                                                 <tr class="action_table_row">
                                                     <td>{{$key+1}}</td>
-                                                    <td>{{$leave_type_data->leave_type_name}}</td>
-                                                    <td>{{$leave_type_data->leave_type_description}}</td>
-                                                    <td>
-                                                        @if($leave_type_data->leave_type_status=='Active')
-                                                            <span style="color: green;"><i class="fas fa-check-circle"></i>{{$leave_type_data->leave_type_status}}</span>
-                                                        @else
-                                                            <span style="color: red;"><i class="fas fa-times-circle"></i>{{$leave_type_data->leave_type_status}}</span>
-                                                        @endif
-                                                        
-                                                    </td>
+                                                    <td>{{$project_data->project_name}}</td>
+                                                    <td>{{$project_data->team_name}}</td>
+                                                    <td>{{$project_data->description}}</td>
                                                     <td class="action">
-                                                        {{Form::open(['url'=>"leave_type/$leave_type_data->leave_type_id",'method'=>'DELETE'])}}
-                                                            <button class="btn btn-danger"><i class="fas fa-trash" onclick="return confirm('Are You Sure?')"></i></button>
+                                                        {{Form::open(['url'=>"project/$project_data->project_id",'method'=>'DELETE'])}}
+                                                            <button class="btn btn-link"><i class="fas fa-trash text-danger" onclick="return confirm('Are You Sure?')"></i></button>
                                                         {{Form::close()}}
 
-                                                        {{Form::open(['url'=>"leave_type/$leave_type_data->leave_type_id/edit",'method'=>'GET'])}}
-                                                        <button class="btn btn-primary"><i class="fas fa-edit"></i></button>
-                                                        {{Form::close()}}
-
-                                                        {{Form::open(['url'=>"leave_type/$leave_type_data->leave_type_id",'method'=>'GET'])}}
-                                                            @if($leave_type_data->branch_status=='Inactive')
-                                                            <button class="btn btn-success"><i class="fas fa-check"></i></button>
-                                                            @else
-                                                            <button class="btn btn-warning"><i class="fas fa-times"></i></button>
-                                                            @endif
+                                                        {{Form::open(['url'=>"project/$project_data->project_id/edit",'method'=>'GET'])}}
+                                                            <button class="btn btn-link"><i class="fas fa-edit text-primary"></i></button>
                                                         {{Form::close()}}
                                                     </td>
                                                 </tr>
@@ -145,9 +131,9 @@
                                             <tfoot>
                                                 <tr>
                                                     <th>#</th>
-                                                    <th>Leave Type</th>
-                                                    <th>Leave Type Description</th>
-                                                    <th>Status</th>
+                                                    <th>Project Name</th>
+                                                    <th>Working Team</th>
+                                                    <th>Description</th>
                                                     <th>Action</th>
                                                 </tr>
                                             </tfoot>

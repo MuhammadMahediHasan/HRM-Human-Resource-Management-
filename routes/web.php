@@ -38,7 +38,7 @@ Route::group(['middleware'=>'auth'],function(){
 	Route::resource('/attendence','AttendenceController');
 	Route::get('/get_department_wise_data','AttendenceController@get_department_wise_data');
 	Route::get('/attendence_report','AttendenceReportController@index');
-	Route::get('/attendence_report_data','AttendenceReportController@attendence_report_data');
+	Route::get('/attendence_report_data','AttendenceController@AttendenceReportSheet');
 
 	//Leave
 	Route::resource('/leave','LeaveController');
@@ -51,6 +51,14 @@ Route::group(['middleware'=>'auth'],function(){
 	Route::post('/selery_structure_employee','SalaryStructureController@GetEmployee');
 	Route::post('/salary_slip_data','SalarySlipController@GetSalarySlipData');
 	Route::post('/salary_bulk_payment','SalarySlipController@SalaryBulkPayment');
+
+	//Team
+	Route::resource('/team','TeamController');
+	Route::post('/team_leader','TeamController@GetTeamLeader');
+	Route::post('/team_member','TeamController@GetTeamMember');
+
+	//Project & Task
+	Route::resource('/project','ProjectController');
 
 });
 Auth::routes();

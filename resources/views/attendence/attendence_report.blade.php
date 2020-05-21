@@ -7,28 +7,11 @@
         <div class="row align-items-end">
             <div class="col-lg-8">
                 <div class="page-header-title">
-
-@if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif         
-
-<link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
-<script src="http://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
-<script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>  
-        {!! Toastr::message() !!}   
-                <!-- Attendence -->
-                <div class="row">
-                    <div class="col-lg-12">
-                        <h2>Employee Attendence Report</h2>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <a href="/attendence/create" class="btn-sm btn btn-primary">Attendence</a>
+                        </div>
                     </div>
-                </div>
-
                 </div>
             </div>
             <div class="col-lg-4">
@@ -37,9 +20,9 @@
                         <li class="breadcrumb-item">
                             <a href="/backend"><i class="feather icon-home"></i></a>
                         </li>
-                        <li class="breadcrumb-item"><a href="/add_employe">Employee</a>
+                        <li class="breadcrumb-item"><a href="#">Attendence</a>
                         </li>
-                        <li class="breadcrumb-item"><a href="/employe_transfer">Transfer Employee</a>
+                        <li class="breadcrumb-item"><a href="/attendence">Attendence Sheet</a>
                         </li>
                     </ul>
                 </div>
@@ -61,30 +44,39 @@
                             <!-- Default ordering table start -->
                             <div class="card">
                                 <div class="card-header">
-                                    <h5>Search Attendence with Department..</h5>
+                                    <h5>Attendence Sheet</h5>
                                     <span>Table</span>
                                 </div>
                                 <div class="card-block">
                                     <div class="row">
                                         <div class="col-lg-12">
-                                            <h4 class="text-center">Attendence Report</h4>
+                                            <h4 class="text-center">Attendence Sheet</h4>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-lg-2"></div>
                                         <div class="col-lg-8">
-                                          <table class="table table-bordered">
+                                          <table class="custom_table table-bordered">
                                             <thead>
-                                              <tr style="background: #263544; color: white">
+                                              <tr>
                                                 <th>Date</th>
+                                                <th>Branch</th>
                                                 <th>Department</th>
-                                                <th></th>
+                                                <th>Generate Sheet</th>
                                               </tr>
                                             </thead>
                                             <tbody>
                                               <tr>
-                                                <td><input type="date" name="date" class="form-control date"></td>
+                                                <td><input type="date" name="date" class="form-control date" value="<?php echo date('Y-m-d'); ?>"></td>
+                                                <td>
+                                                    <select name="branch" class="form-control branch">
+                                                        <option value="">Select</option>
+                                                        @foreach($branch as $branch_data)
+                                                        <option value="{{$branch_data->branch_id}}">{{$branch_data->branch_name}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </td>
                                                 <td>
                                                     <select name="department" class="form-control department">
                                                         <option value="">Select</option>
@@ -93,16 +85,18 @@
                                                         @endforeach
                                                     </select>
                                                 </td>
-                                                <td><button class="btn btn-success btn-sm generate_report">Generate Report</button></td>
+                                                <td><button class="btn btn-success btn-sm generate_report">Submit</button></td>
                                               </tr>
                                             </tbody>
                                           </table>
                                         </div>
                                     <div class="col-lg-2"></div>
                                 </div>
+                                <br>
                                 <div class="row employe_data">
                                     
                                 </div>
+                                <br>
                             </div>
                         </div>
                     </div>
@@ -118,31 +112,31 @@
 
 
 </div>
-<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+@stop
+@section('script')
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $(document).on("click",".generate_report", function(){
+                var branch=$(".branch").val();
+                var department=$(".department").val();
+                var date=$(".date").val();
 
-<script type="text/javascript">
-    $(document).ready(function(){
-        $(document).on("click",".generate_report", function(){
-            var department=$(".department").val();
-            var date=$(".date").val();
-            $.ajax({
-                url:'/attendence_report_data',
-                method:'get',
-                dataType:"html",
-                data:{
-                    "_token":"{{ csrf_token() }}",
-                    'department':department,
-                    'date':date,
-                },
-                success:function(data)
-                {
-                    console.log(data);
-                    $(".employe_data").html(data);
-                }
+                $.ajax({
+                    url:'/attendence_report_data',
+                    method:'get',
+                    dataType:"html",
+                    data:{
+                        "_token":"{{ csrf_token() }}",
+                        'branch':branch,
+                        'department':department,
+                        'date':date,
+                    },
+                    success:function(data)
+                    {
+                        $(".employe_data").html(data);
+                    }
+                });
             });
         });
-    });
-</script>
-
-
+    </script>
 @stop

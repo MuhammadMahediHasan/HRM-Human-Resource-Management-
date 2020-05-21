@@ -2441,7 +2441,7 @@ table thead .border-bottom-info th {
 	display: -ms-flexbox;
 	display: flex;
 	float: left;
-	height: 70px;
+	height: 56px;
 	text-align: center;
 	text-transform: uppercase;
 	width: 250px;
@@ -2965,7 +2965,7 @@ table thead .border-bottom-info th {
 	height: 100%
 }
 .pcoded[theme-layout=vertical] .pcoded-navbar[pcoded-navbar-position=fixed] {
-	top: 70px
+	top: 56px;
 }
 .pcoded[theme-layout=vertical] .pcoded-content {
 	position: relative;
@@ -3138,7 +3138,7 @@ table thead .border-bottom-info th {
 	top: 0;
 	opacity: 1;
 	visibility: visible;
-	font-family: inherit;
+	font-family: feather;
 	font-size: 12px;
 	padding-right: 5px
 }
@@ -3179,7 +3179,7 @@ table thead .border-bottom-info th {
 	position: absolute;
 	right: 15px;
 	top: 5px;
-	font-family: inherit;
+	font-family: feather;
 	padding-top: 5px;
 	-webkit-transition: opacity .3s linear;
 	transition: opacity .3s linear
@@ -9989,6 +9989,7 @@ table.dataTable.dtr-inline.collapsed>tbody>tr>th:first-child:before {
 		font-size: 16px
 	}
 	.header-navbar .navbar-wrapper .navbar-logo {
+		padding-top: 3px;
 		display: inherit
 	}
 	.header-navbar .navbar-wrapper .navbar-logo a {

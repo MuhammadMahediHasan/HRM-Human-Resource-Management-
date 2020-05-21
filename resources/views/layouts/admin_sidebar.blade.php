@@ -53,17 +53,12 @@
                             </a>
                             <ul class="pcoded-submenu">
                                 <li class="">
-                                    <a href="add_employe" class="waves-effect waves-dark">
+                                    <a href="/add_employe/create" class="waves-effect waves-dark">
                                         <span class="pcoded-mtext">Add New Employee</span>
                                     </a>
                                 </li>
                                 <li class="">
-                                    <a href="employe_transfer" class="waves-effect waves-dark">
-                                        <span class="pcoded-mtext">Employee Transfer</span>
-                                    </a>
-                                </li>
-                                <li class="">
-                                    <a href="employe_report" class="waves-effect waves-dark">
+                                    <a href="/add_employe" class="waves-effect waves-dark">
                                         <span class="pcoded-mtext">Employee Report</span>
                                     </a>
                                 </li>
@@ -80,13 +75,13 @@
                             </a>
                             <ul class="pcoded-submenu">
                                 <li class="">
-                                    <a href="/attendence" class="waves-effect waves-dark">
-                                        <span class="pcoded-mtext">Add Employee Attendence</span>
+                                    <a href="/attendence/create" class="waves-effect waves-dark">
+                                        <span class="pcoded-mtext">Attendence</span>
                                     </a>
                                 </li>
                                 <li class="">
-                                    <a href="/attendence_report" class="waves-effect waves-dark">
-                                        <span class="pcoded-mtext">Attendence Report</span>
+                                    <a href="/attendence" class="waves-effect waves-dark">
+                                        <span class="pcoded-mtext">Attendence Sheet</span>
                                     </a>
                                 </li>
                             </ul>
@@ -98,7 +93,7 @@
                                     <i class="far fa-money-bill-alt"></i>
                                 </span>
                                 <span class="pcoded-mtext">Payroll</span>
-                                <span class="pcoded-badge label label-danger">100+</span>
+                                <span class="pcoded-badge label label-primary">5+</span>
                             </a>
                             <ul class="pcoded-submenu">
                                 <li class="">
@@ -126,9 +121,35 @@
                                         <span class="pcoded-mtext">Salary Slip Report</span>
                                     </a>
                                 </li>
-                                <li class="">
+                                <!-- <li class="">
                                     <a href="/salary_slip" class="waves-effect waves-dark">
                                         <span class="pcoded-mtext">Total Earning Report</span>
+                                    </a>
+                                </li> -->
+                            </ul>
+                        </li>
+
+                        <li class=" ">
+                            <a href="/team/create" class="waves-effect waves-dark">
+                                <span class="pcoded-micon">
+                                    <i class="fas fa-user-friends"></i>
+                                </span>
+                                <span class="pcoded-mtext">Team</span>
+                            </a>
+                        </li>
+                        
+                        <li class="pcoded-hasmenu">
+                            <a href="javascript:void(0)" class="waves-effect waves-dark">
+                                <span class="pcoded-micon">
+                                    <i class="fas fa-tasks"></i>
+                                </span>
+                                <span class="pcoded-mtext">Project & Task</span>
+                                <span class="pcoded-badge label label-danger">100+</span>
+                            </a>
+                            <ul class="pcoded-submenu">
+                                <li class="">
+                                    <a href="/project" class="waves-effect waves-dark">
+                                        <span class="pcoded-mtext">Project</span>
                                     </a>
                                 </li>
                             </ul>

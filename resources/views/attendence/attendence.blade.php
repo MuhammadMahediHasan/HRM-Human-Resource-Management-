@@ -6,26 +6,11 @@
     <div class="page-header card">
         <div class="row align-items-end">
             <div class="col-lg-8">
-                <div class="page-header-title">
-
-@if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif         
-
-<link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
-<script src="http://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
-<script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>  
-        {!! Toastr::message() !!}   
+                <div class="page-header-title">  
                 <!-- Attendence -->
                 <div class="row">
                     <div class="col-lg-12">
-                        <h2>Employee Attendence</h2>
+                        <a href="/attendence" class="btn btn-sm btn-primary">Attendence Sheet</a>
                     </div>
                 </div>
 
@@ -55,10 +40,6 @@
                 <div class="page-body">
                     <div class="row">
                         <div class="col-sm-12">
-                            <!-- Zero config.table start -->
-                            
-                            <!-- Zero config.table end -->
-                            <!-- Default ordering table start -->
                             <div class="card">
                                 <div class="card-header">
                                     <h5>Add Employee Attendence</h5>
@@ -75,7 +56,7 @@
                                 <div class="row">
                                     <div class="col-lg-2"></div>
                                         <div class="col-lg-8">
-                                          <table class="table table-bordered">
+                                          <table class="custom_table table-bordered">
                                             <thead>
                                               <tr style="background: #263544; color: white">
                                                 <th>Department</th>
@@ -99,6 +80,7 @@
                                         </div>
                                     <div class="col-lg-2"></div>
                                 </div>
+                                <br>
                                 <div class="row employe_data">
                                     
                                 </div>
@@ -107,10 +89,9 @@
                         </div>
                     </div>
                 </div>
-                <!-- Page-body end -->
             </div>
         </div>
-        <!-- Main-body end -->
+        
         <div id="styleSelector">
 
         </div>
@@ -118,8 +99,8 @@
 
 
 </div>
-<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-
+@stop
+@section('script')
 <script type="text/javascript">
     $(document).ready(function(){
         $(document).on("change",".department", function(){
@@ -141,6 +122,4 @@
         });
     });
 </script>
-
-
 @stop

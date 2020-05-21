@@ -32,45 +32,6 @@ class CreateEmploye extends Migration
             $table->string('employe_photo');
             $table->timestamps();
         });
-
-
-        Schema::create('employe_contact_info', function (Blueprint $table) {
-            $table->bigIncrements('employe_contact_info_id');
-            $table->string('id');
-            $table->string('phone_number');
-            $table->string('email');
-            $table->string('present_address');
-            $table->string('parmanent_address');
-            $table->timestamps();
-        });
-
-
-        Schema::create('employe_bank_info', function (Blueprint $table) {
-            $table->bigIncrements('employe_bank_info_id');
-            $table->string('id');
-            $table->string('bank_account_number');
-            $table->string('bank_name');
-            $table->string('bank_Branch_name');
-            $table->timestamps();
-        });
-
-
-        Schema::create('employe_joining_info', function (Blueprint $table) {
-            $table->bigIncrements('employe_joining_info_id');
-            $table->string('id');
-            $table->string('offer_date');
-            $table->string('confirmation_date');
-            $table->string('joining_date');
-            $table->timestamps();
-        });
-
-
-        Schema::create('employe_personal_bio', function (Blueprint $table) {
-            $table->bigIncrements('employe_personal_bio_id');
-            $table->string('id');
-            $table->string('cv');
-            $table->timestamps();
-        });
     }
 
     /**

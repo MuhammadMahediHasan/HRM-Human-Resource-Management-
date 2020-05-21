@@ -82,7 +82,7 @@
                                             <label class="col-sm-12 col-form-label">Employee ID</label>
                                             <div class="col-sm-12">
 
-                                                {{Form::text('employe_code','',['class'=>'form-control required','placeholder'=>'Employee ID'])}}
+                                                {{Form::text('employe_code',$employee_code,['class'=>'form-control required','placeholder'=>'Employee ID','readonly'])}}
 
                                                 
                                                 <font class="text-danger">{{$errors->first('employe_code')}}</font>
