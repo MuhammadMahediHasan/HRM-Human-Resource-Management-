@@ -4,7 +4,7 @@
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 <head>
 		<meta charset="utf-8">
-		<title>404 not found</title>
+		<title>500 Internal Server Error</title>
 		<meta name="description" content="Able 7.0 404 Error page design" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta name="author" content="Codedthemes">
@@ -53,7 +53,7 @@
                 </div>
 
                 <!-- Your text -->
-                <h1>Oops! Error 404 not found.</h1>
+                <h1>Oops! Error 500 Internal Server Error.</h1>
 
                 <p>The page you were looking for doesn't exist.<br>
                     We think the page may have moved.</p>
@@ -64,6 +64,7 @@
         <footer class="light">
             <p>Any Kind Of Error, Please Contact with Developer Team.</p>
         </footer>
+
         <script src="{{asset('backend_asset/404/js/jquery.min.js')}}" type="a2c27b3a245f61520cf7a8d8-text/javascript"></script>
         <script src="{{asset('backend_asset/404/js/bootstrap.min.js')}}" type="a2c27b3a245f61520cf7a8d8-text/javascript"></script>
         <script src="https://ajax.cloudflare.com/cdn-cgi/scripts/a2bd7673/cloudflare-static/rocket-loader.min.js" data-cf-settings="a2c27b3a245f61520cf7a8d8-|49" defer=""></script>

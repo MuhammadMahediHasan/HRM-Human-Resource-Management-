@@ -13,7 +13,6 @@
 Route::group(['middleware'=>'auth'],function(){
 
 	Route::get('/', 'HomeController@index');
-	Route::get('/test', 'HomeController@helper');
 	Route::get('/home', 'HomeController@index')->name('home');
 
 	Route::get('/backend','BackendController@index');
@@ -59,8 +58,7 @@ Route::group(['middleware'=>'auth'],function(){
 
 	//Project & Task
 	Route::resource('/project','ProjectController');
+	Route::resource('/task','TaskController');
 
 });
 Auth::routes();
-
-// Route::get('/home', 'HomeController@index')->name('home');

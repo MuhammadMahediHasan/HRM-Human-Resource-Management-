@@ -152,6 +152,11 @@
                                         <span class="pcoded-mtext">Project</span>
                                     </a>
                                 </li>
+                                <li class="">
+                                    <a href="/task" class="waves-effect waves-dark">
+                                        <span class="pcoded-mtext">Task</span>
+                                    </a>
+                                </li>
                             </ul>
                         </li>
 

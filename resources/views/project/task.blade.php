@@ -3,12 +3,12 @@
 
 <div class="pcoded-content">
     <!-- [ breadcrumb ] start -->
-    <div class="page-header card">
+    <div class="page-header card" id="task">
         <div class="row align-items-end">
             <div class="col-lg-8">
                 <div class="page-header-title">          
                     <!-- Trigger the modal with a button -->
-                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">Create New Team</button>
+                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">Create New Task</button>
 
                     <!-- Modal -->
                     <div id="myModal" class="modal fade" role="dialog">
@@ -17,71 +17,76 @@
                         <!-- Modal content-->
                         <div class="modal-content" id="team">
                           <div class="modal-header">
-                            <h4 class="modal-title">Create Team</h4>
+                            <h4 class="modal-title">Create Task</h4>
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
                           </div>
-                          {{Form::open(['url'=>"/team"])}}
+                          {{Form::open(['url'=>"/task"])}}
                           <div class="modal-body">
                             <div class="form-group row">
-                                <label class="col-sm-4 col-form-label">Name</label>
+                                <label class="col-sm-4 col-form-label">Project</label>
                                 <div class="col-sm-8">
-                                    {{Form::text('team_name','',['class'=>'form-control','placeholder'=>'Team Name'])}}
-                                    <font class="text-danger">{{$errors->first('team_name')}}</font>
+                                    @php
+                                        $project_array = [];
+                                        $project_array[''] = "--select--";
+                                    @endphp
+
+                                    @foreach($project as $key => $project_data)
+                                        @php $project_array[$project_data->project_id] = $project_data->project_name; @endphp
+                                    @endforeach
+
+                                    {{Form::select('project_id',$project_array,'null',['class'=>'form-control','v-model'=>'project_id','v-on:change'=>'GetTeam'])}}
+                                    <font class="text-danger">{{$errors->first('project_id')}}</font>
                                 </div>
                             </div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-form-label">Team Name</label>
+                                <div class="col-sm-8">
+                                    <select name="team_id" class="form-control">
+                                        <option selected="selected" :value="team.team_id" v-text="team.team_name"></option>
+                                    </select>
+                                    <font class="text-danger">{{$errors->first('team_id')}}</font>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-form-label">Task Name</label>
+                                <div class="col-sm-8">
+                                    {{Form::text('task_name','',['class'=>'form-control','placeholder'=>'Task Name'])}}
+                                    <font class="text-danger">{{$errors->first('task_name')}}</font>
+                                </div>
+                            </div>
+
                             <div class="form-group row">
                                 <label class="col-sm-4 col-form-label">Description</label>
                                 <div class="col-sm-8">
                                     {{Form::textarea('description','',['class'=>'form-control','placeholder'=>'Description','rows'=>3])}}
+                                    <font class="text-danger">{{$errors->first('description')}}</font>
                                 </div>
                             </div>
+
                             <div class="form-group row">
-                                <label class="col-sm-4 col-form-label">Branch</label>
+                                <label class="col-sm-4 col-form-label">Start From</label>
                                 <div class="col-sm-8">
-                                    @php
-                                        $branch_array = [];
-                                        $branch_array[''] = "--select--";
-                                    @endphp
-
-                                    @foreach($branch as $key => $branch_data)
-                                        @php $branch_array[$branch_data->branch_id] = $branch_data->branch_name; @endphp
-                                    @endforeach
-
-                                    {{Form::select('branch_id',$branch_array,'null',['class'=>'form-control','v-model'=>'branch_name'])}}
-                                    <font class="text-danger">{{$errors->first('branch_id')}}</font>
+                                    {{Form::input('dateTime-local','start_from','',['class'=>'form-control'])}}
+                                    <font class="text-danger">{{$errors->first('start_from')}}</font>
                                 </div>
                             </div>
+
                             <div class="form-group row">
-                                <label class="col-sm-4 col-form-label">Department</label>
+                                <label class="col-sm-4 col-form-label">End Time</label>
                                 <div class="col-sm-8">
-                                    @php
-                                        $department_array = [];
-                                        $department_array[''] = "--select--";
-                                    @endphp
-
-                                    @foreach($department as $key => $department_data)
-                                        @php $department_array[$department_data->department_id] = $department_data->department_name; @endphp
-                                    @endforeach
-
-                                    {{Form::select('department_id',$department_array,'null',['class'=>'form-control','v-model'=>'department_name','v-on:change'=>'GetEmployee'])}}
-                                    <font class="text-danger">{{$errors->first('department_id')}}</font>
+                                    {{Form::input('dateTime-local','end_time','',['class'=>'form-control'])}}
+                                    <font class="text-danger">{{$errors->first('end_time')}}</font>
                                 </div>
                             </div>
+                            
+
                             <div class="form-group row">
-                                <label class="col-sm-4 col-form-label">Team Leader</label>
-                                <div class="col-sm-8">
-                                    <select id="emloyee_name" name="team_leader_id" class="form-control" @change="GetTeamMember($event.target.value)">
-                                        <option value="">--select--</option>
-                                        <option v-for="data in Employee" :value="data.id" v-text="data.employe_name"></option>
-                                    </select>
-                                    <font class="text-danger">{{$errors->first('team_leader_id')}}</font>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-sm-4 col-form-label">Team Member</label>
+                                <label class="col-sm-4 col-form-label">Task Assign to Team Member</label>
                                 <div class="col-sm-8">
                                     <select id="chkveg" name="team_member[]" multiple="multiple" class="form-control">
-                                        <option v-for="data in TeamMember" :value="data.id" v-text="data.employe_name"></option>
+                                        <option v-for="data in team_member" :value="data.id" v-text="data.employe_name"></option>
                                     </select>
                                     <font class="text-danger">{{$errors->first('team_member')}}</font>
                                 </div>
@@ -105,8 +110,8 @@
                         <li class="breadcrumb-item">
                             <a href="/backend"><i class="feather icon-home"></i></a>
                         </li>
-                        <li class="breadcrumb-item"><a href="#">Team</a>
-                        <li class="breadcrumb-item"><a href="/team/create">Create Team</a>
+                        <li class="breadcrumb-item"><a href="#">Task</a>
+                        <li class="breadcrumb-item"><a href="/team/create">Create Task</a>
                         </li>
                     </ul>
                 </div>
@@ -146,16 +151,7 @@
                                                     <td>{{$team_data['team_name']}}</td>
                                                     <td>{{$team_data['employe_name']}}</td>
                                                     <td>
-                                                        @foreach($team_data['team_member'] as $team_member_data)
-                                                        @php
-                                                            $team_member_name = collect($employee)->where('id',$team_member_data['team_member_id']);
-                                                        @endphp
-
-                                                            @foreach($team_member_name as $name)
-                                                                {{ $name['employe_name'] }}
-                                                            @endforeach
-                                                        <br>
-                                                        @endforeach
+                                                        
                                                     </td>
                                                     <td class="action">
                                                         {{Form::open(['url'=>"team/".$team_data['team_id'],'method'=>'DELETE'])}}
@@ -201,17 +197,28 @@
 @section('script')
     <script type="text/javascript">
         new Vue({
-            el: "#team",
+            el: "#task",
             data : {
                 csrf_token : token,
                 baseUrl : baseUrl,
                 Designation : [],
-                TeamMember : [],
+                team_member : [],
                 Employee : [],
-                department_name : '',
-                branch_name : '',
+                project_id : '',
+                team : [],
             },
             methods : {
+                GetTeam : function(){
+                    const _this = this;
+                    $.ajax({
+                        url : _this.baseUrl + '/task/' + _this.project_id,
+                        type : 'get',
+                        success : function (response){
+                            _this.team = response.team;
+                            _this.team_member = response.team_member;
+                        }
+                    })
+                },
                 GetEmployee : function (){
                     const _this = this;
                     $.ajax({
@@ -246,7 +253,6 @@
             },
             mounted(){
                 // this.GetRequiredData();
-                console.log("ok");
             }
         })
     </script>
