@@ -141,6 +141,8 @@
                                                     <th>Project Name</th>
                                                     <th>Task Name</th>
                                                     <th>Description</th>
+                                                    <th>Start Date</th>
+                                                    <th>End Date</th>
                                                     <th>Assigned Member</th>
                                                     <th>Action</th>
                                                 </tr>
@@ -152,6 +154,13 @@
                                                     <td>{{$task_data['project_name']}}</td>
                                                     <td>{{$task_data['task_name']}}</td>
                                                     <td>{{$task_data['description']}}</td>
+                                                    <td>
+                                                        {{ date('d-F-Y h:i A', strtotime($task_data['start_from'])) }} 
+
+                                                    </td>
+                                                    <td>
+                                                         {{ date('d-F-Y h:i A', strtotime($task_data['end_time'])) }} 
+                                                    </td>
                                                     <td>
                                                         @foreach($task_data['team_member'] as $team_member_data)
                                                         @php
