@@ -138,30 +138,39 @@
                                             <thead>
                                                 <tr>
                                                     <th>#</th>
-                                                    <th>Name</th>
-                                                    <th>Team Leader</th>
-                                                    <th>Team Member</th>
+                                                    <th>Project Name</th>
+                                                    <th>Task Name</th>
+                                                    <th>Description</th>
+                                                    <th>Assigned Member</th>
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach($team as $key=> $team_data)
+                                                @foreach($task as $key=> $task_data)
                                                 <tr class="action_table_row">
                                                     <td>{{$key+1}}</td>
-                                                    <td>{{$team_data['team_name']}}</td>
-                                                    <td>{{$team_data['employe_name']}}</td>
+                                                    <td>{{$task_data['project_name']}}</td>
+                                                    <td>{{$task_data['task_name']}}</td>
+                                                    <td>{{$task_data['description']}}</td>
                                                     <td>
-                                                        
+                                                        @foreach($task_data['team_member'] as $team_member_data)
+                                                        @php
+                                                            $team_member_name = collect($employee)->where('id',$team_member_data['task_assign_member_id']);
+                                                        @endphp
+
+                                                            @foreach($team_member_name as $name)
+                                                                {{ $name['employe_name'] }}
+                                                            @endforeach
+                                                        <br>
+                                                        @endforeach
                                                     </td>
                                                     <td class="action">
-                                                        {{Form::open(['url'=>"team/".$team_data['team_id'],'method'=>'DELETE'])}}
+                                                        {{Form::open(['url'=>"/task/".$task_data['task_id'],'method'=>'DELETE'])}}
                                                         <button class="btn btn-link"><i class="fas fa-trash text-danger" onclick="return confirm('Are You Sure?')"></i></button>
-                                                            
                                                         {{Form::close()}}
 
-                                                        {{Form::open(['url'=>"team/".$team_data['team_id']."/edit",'method'=>'GET'])}}
+                                                        {{Form::open(['url'=>"/task/".$task_data['task_id']."/edit",'method'=>'GET'])}}
                                                         <button class="btn btn-link"><i class="fas fa-edit text-primary"></i></button>
-                                                        
                                                         {{Form::close()}}
                                                     </td>
                                                 </tr>
@@ -170,9 +179,10 @@
                                             <tfoot>
                                                 <tr>
                                                     <th>#</th>
-                                                    <th>Name</th>
-                                                    <th>Team Leader</th>
-                                                    <th>Team Member</th>
+                                                    <th>Project Name</th>
+                                                    <th>Task Name</th>
+                                                    <th>Description</th>
+                                                    <th>Assigned Member</th>
                                                     <th>Action</th>
                                                 </tr>
                                             </tfoot>

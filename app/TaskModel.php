@@ -20,4 +20,9 @@ class TaskModel extends Model
     		'team_id'=>'required',
     	];
     }
+
+    public function team_member()
+    {
+        return $this->hasMany('App\TaskAssignModel','task_id');
+    }
 }

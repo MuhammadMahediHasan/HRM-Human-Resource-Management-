@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\TaskAssignModel;
 use App\ProjectModel;
+use App\TaskModel;
 use App\TeamModel;
 use Validator;
-use Toastr;
 use Redirect;
+use Toastr;
 
 class ProjectController extends Controller
 {
@@ -106,6 +108,12 @@ class ProjectController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $task = TaskModel::where('project_id',$id)->get()->pluck('task_id')->toArray();
+        TaskAssignModel::whereIn('task_id',$task)->delete();
+        TaskModel::where('project_id',$id)->delete();
+        ProjectModel::findOrFail($id)->delete();
+
+        Toastr::success('Project Deleted Successfully', '', ["positionClass" => "toast-top-right"]);
+        return Redirect::to('/project');
     }
 }

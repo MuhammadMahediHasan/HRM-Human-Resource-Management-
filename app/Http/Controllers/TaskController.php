@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\TeamMemberModel;
 use App\TaskAssignModel;
+use App\EmployeModel;
 use App\ProjectModel;
 use App\TaskModel;
 use App\TeamModel;
 use Validator;
-use Toastr;
+use Redirect;
 use DateTime;
+use Toastr;
 
 class TaskController extends Controller
 {
@@ -23,6 +25,8 @@ class TaskController extends Controller
     {
         $data['team'] = TeamModel::all();
         $data['project'] = ProjectModel::all();
+        $data['employee'] = EmployeModel::get()->toArray();
+        $data['task'] = TaskModel::join('project','project.project_id','=','task.project_id')->with('team_member')->get()->toArray();
 
         return view('project.task',$data);
     }
@@ -45,17 +49,12 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
-        $start_from = new DateTime($request->start_from);
-        $end_time = new DateTime($request->end_time);
-
         $task = new TaskModel;
         $requested_data = $request->all();
         $validate = Validator::make($request->all(), $task->validation());
         if ($validate->fails()) {
             return back()->withInput()->withErrors($validate);
         }
-        $requested_data['start_from'] = $start_from->format("Y-m-d H:i:s");
-        $requested_data['end_time'] = $end_time->format("Y-m-d H:i:s");
         
         $task->fill($requested_data)->save();
 
@@ -85,6 +84,7 @@ class TaskController extends Controller
         $data['team_member'] = TeamMemberModel::where('team_id', $data['team']['team_id'])
                                                 ->join('users','users.id','=','team_member.team_member_id')->get();
 
+         $data['team_member_id'] = TaskAssignModel::where('task_id',$id)->get()->pluck('task_assign_member_id')->toArray();
         return response()->json($data);
     }
 
@@ -96,7 +96,11 @@ class TaskController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data['team'] = TeamModel::all();
+        $data['project'] = ProjectModel::all();
+        $data['task'] = TaskModel::findOrFail($id);
+
+        return view('project.task_edit',$data);
     }
 
     /**
@@ -108,7 +112,27 @@ class TaskController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $task = TaskModel::findOrFail($id);
+        $requested_data = $request->all();
+        $validate = Validator::make($request->all(), $task->validation());
+        if ($validate->fails()) {
+            return back()->withInput()->withErrors($validate);
+        }
+
+        $task->fill($requested_data)->save();
+
+        if ($request->team_member) {
+            $team_member = array();
+            foreach ($request->team_member as $key => $value) {
+                $team_member[$key]['task_id'] = $task->task_id;
+                $team_member[$key]['task_assign_member_id'] = $value;
+            }
+            TaskAssignModel::where('task_id',$id)->delete();
+            TaskAssignModel::insert($team_member);
+        }
+
+        Toastr::success('Task Upadted Successfully', '', ["positionClass" => "toast-top-right"]);
+        return Redirect::to('/task');
     }
 
     /**
@@ -119,6 +143,9 @@ class TaskController extends Controller
      */
     public function destroy($id)
     {
-        //
+        TaskAssignModel::where('task_id',$id)->delete();
+        TaskModel::findOrFail($id)->delete();
+        Toastr::success('Task Deleted Successfully', '', ["positionClass" => "toast-top-right"]);
+        return Redirect::to('/task');
     }
 }
