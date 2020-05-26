@@ -68,26 +68,11 @@ class Errors{
 function dd(data) {
     console.log(data);
 }
-//$('.select2').select2();
-
-var height = $(window).height();
-$('.main_content_wrapper').css('min-height', height-95);
 
 //===========Menu Active Classes=================
 //var path = location.pathname;
-var path = document.location;
-var target = $('ul.ml-menu li a[href$="' + path + '"]');
-target.parent().addClass("active");
-target.parent().parent().parent().addClass('active');
-var top_menu = $('.header a[href$="' + path + '"]');
-
-
-function ReportPrintDiv(divName) {
-   var printContents = document.getElementById(divName).innerHTML;
-   var originalContents = document.body.innerHTML;
-   document.body.innerHTML = printContents;
-   window.print();
-   document.body.innerHTML = originalContents;
-
-   window.location.reload();
-}
+var path = document.location.pathname;
+var target = $('ul li a[href$="' + path + '"]');
+console.log(path);
+target.parent().addClass("active").addClass("pcoded-trigger");
+target.parent().parent().parent().addClass("active").addClass("pcoded-trigger");

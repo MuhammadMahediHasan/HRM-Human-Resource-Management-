@@ -81,7 +81,7 @@
                         <div class="col-sm-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h5>Default Ordering</h5>
+                                    <h5>Branch List</h5>
                                     <span>Table</span>
                                 </div>
                                 <div class="card-block">
@@ -121,10 +121,10 @@
 
                                                         {{Form::open(['url'=>"branch/$branch_data->branch_id",'method'=>'GET'])}}
                                                             @if($branch_data->branch_status=='Inactive')
-                                                        <button class="btn btn-link"><i class="fas fa-check text-succes"></i></button>
+                                                        <button class="btn btn-link text-success"><i class="fas fa-check-circle"></i></button>
                                                             
                                                             @else
-                                                        <button class="btn btn-link"><i class="fas fa-times text-warning"></i></button>
+                                                        <button class="btn btn-link text-warning"><i class="fas fa-times-circle"></i></button>
                                                             
                                                             @endif
                                                         {{Form::close()}}

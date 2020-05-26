@@ -142,7 +142,7 @@
                                                         <button class="btn btn-link"><i class="fas fa-check text-success"></i></button>
                                                             
                                                             @else
-                                                        <button class="btn btn-link"><i class="fas fa-times text-warning"></i></button>
+                                                        <button class="btn btn-link"><i class="fas fa-times-circle"></i></button>
                                                             
                                                             @endif
                                                         {{Form::close()}}
