@@ -60,5 +60,8 @@ Route::group(['middleware'=>'auth'],function(){
 	Route::resource('/project','ProjectController');
 	Route::resource('/task','TaskController');
 
+	//Meeting & Event
+	Route::resource('/meeting&event','MeetingEventController');
+
 });
 Auth::routes();

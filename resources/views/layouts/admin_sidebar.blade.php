@@ -137,6 +137,15 @@
                                 <span class="pcoded-mtext">Team</span>
                             </a>
                         </li>
+
+                        <li class=" ">
+                            <a href="/meeting&event" class="waves-effect waves-dark">
+                                <span class="pcoded-micon">
+                                    <i class="fas fa-bullhorn"></i>
+                                </span>
+                                <span class="pcoded-mtext">Meeting & Event</span>
+                            </a>
+                        </li>
                         
                         <li class="pcoded-hasmenu">
                             <a href="javascript:void(0)" class="waves-effect waves-dark">

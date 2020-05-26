@@ -191,6 +191,8 @@
                                                     <th>Project Name</th>
                                                     <th>Task Name</th>
                                                     <th>Description</th>
+                                                    <th>Start Date</th>
+                                                    <th>End Date</th>
                                                     <th>Assigned Member</th>
                                                     <th>Action</th>
                                                 </tr>
