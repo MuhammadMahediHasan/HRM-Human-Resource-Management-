@@ -70,9 +70,8 @@ function dd(data) {
 }
 
 //===========Menu Active Classes=================
-//var path = location.pathname;
+
 var path = document.location.pathname;
 var target = $('ul li a[href$="' + path + '"]');
-console.log(path);
 target.parent().addClass("active").addClass("pcoded-trigger");
 target.parent().parent().parent().addClass("active").addClass("pcoded-trigger");

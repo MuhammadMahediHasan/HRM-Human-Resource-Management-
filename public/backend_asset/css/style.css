@@ -2983,7 +2983,7 @@ table thead .border-bottom-info th {
 }
 .pcoded[theme-layout=vertical] .pcoded-navbar .pcoded-item>li>a {
 	text-align: left;
-	padding: 7px 10px 7px 20px;
+	padding: 7px 10px 7px 14px;
 	margin: 5px 0 0;
 	border-radius: 0;
 	border-left: 3px solid transparent

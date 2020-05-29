@@ -29,12 +29,12 @@
                             <h4 class="modal-title">Add Meeting</h4>
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
                           </div>
+                          {{Form::open(['url'=>"/meeting"])}}
                           <div class="modal-body">
-                            {{Form::open(['url'=>"/meeting&event"])}}
                             <div class="form-group row">
                                 <label class="col-sm-4 col-form-label">Mail Sent</label>
                                 <div class="col-sm-8">
-                                    <label> <input type="radio" name="radio" value="1"> Sent Mail to Employees</label>
+                                    <label> <input type="radio" name="mail_sent" value="1"> Sent Mail to Employees</label>
                                 </div>
                             </div>
 
@@ -87,6 +87,7 @@
                                 <label class="col-sm-4 col-form-label">Title</label>
                                 <div class="col-sm-8">
                                     {{Form::text('title','',['class'=>'form-control','placeholder'=>'Title'])}}
+                                    <font class="text-danger">{{$errors->first('title')}}</font>
                                 </div>
                             </div>
 
@@ -157,39 +158,50 @@
                                             <thead>
                                                 <tr>
                                                     <th>#</th>
-                                                    <th>Name</th>
-                                                    <th>Status</th>
+                                                    <th>Branch</th>
+                                                    <th>Department</th>
+                                                    <th>Designation</th>
+                                                    <th>Title</th>
+                                                    <th>Description</th>
+                                                    <th>Time</th>
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach($meeting_event as $key=> $department_data)
+                                                @foreach($meeting as $key=> $meeting_data)
                                                 <tr>
                                                     <td>{{$key+1}}</td>
-                                                    <td>{{$department_data->department_name}}</td>
                                                     <td>
-                                                        @if($department_data->department_status=='Active')
-                                                            <span style="color: green;"><i class="fas fa-check-circle"></i>{{$department_data->department_status}}</span>
+                                                        @if($meeting_data->branch_id == null) 
+                                                            All
                                                         @else
-                                                            <span style="color: red;"><i class="fas fa-times-circle"></i>{{$department_data->department_status}}</span>
+                                                            {{ $meeting_data->branch_name }}
                                                         @endif
-                                                        
                                                     </td>
+                                                    <td>
+                                                        @if($meeting_data->department_id == null) 
+                                                            All
+                                                        @else
+                                                            {{ $meeting_data->department_name }}
+                                                        @endif
+                                                    </td>
+                                                    <td>
+                                                        @if($meeting_data->designation_id == null) 
+                                                            All
+                                                        @else
+                                                            {{ $meeting_data->designation_name }}
+                                                        @endif
+                                                    </td>
+                                                    <td>{{$meeting_data->title}}</td>
+                                                    <td>{{$meeting_data->description}}</td>
+                                                    <td>{{ date('d-F-Y h:i A', strtotime($meeting_data['time'])) }}</td>
                                                     <td class="action">
-                                                        {{Form::open(['url'=>"department/$department_data->department_id",'method'=>'DELETE'])}}
+                                                        {{Form::open(['url'=>"meeting/$meeting_data->meeting_id",'method'=>'DELETE'])}}
                                                             <button class="btn btn-link text-danger"><i class="fas fa-trash" onclick="return confirm('Are You Sure?')"></i></button>
                                                         {{Form::close()}}
 
-                                                        {{Form::open(['url'=>"department/$department_data->department_id/edit",'method'=>'GET'])}}
+                                                        {{Form::open(['url'=>"meeting/$meeting_data->meeting_id/edit",'method'=>'GET'])}}
                                                         <button class="btn btn-link text-primary"><i class="fas fa-edit"></i></button>
-                                                        {{Form::close()}}
-
-                                                        {{Form::open(['url'=>"department/$department_data->department_id",'method'=>'GET'])}}
-                                                            @if($department_data->department_status=='Inactive')
-                                                            <button class="btn btn-link text-success"><i class="fas fa-check-circle"></i></button>
-                                                            @else
-                                                            <button class="btn btn-link text-warning"><i class="fas fa-times-circle"></i></button>
-                                                            @endif
                                                         {{Form::close()}}
                                                     </td>
                                                 </tr>
@@ -198,8 +210,12 @@
                                             <tfoot>
                                                 <tr>
                                                     <th>#</th>
-                                                    <th>Name</th>
-                                                    <th>Status</th>
+                                                    <th>Branch</th>
+                                                    <th>Department</th>
+                                                    <th>Designation</th>
+                                                    <th>Title</th>
+                                                    <th>Description</th>
+                                                    <th>Time</th>
                                                     <th>Action</th>
                                                 </tr>
                                             </tfoot>

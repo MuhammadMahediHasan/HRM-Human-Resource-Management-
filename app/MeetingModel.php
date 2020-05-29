@@ -4,11 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class MeetingEventModel extends Model
+class MeetingModel extends Model
 {
-    protected $table = "meeting_event";
-    protected $primaryKey = "meeting_event_id";
-    protected $fillable = ['branch_id','department_id','designation_id','user_id','meeting_or_event','title','time','description'];
+    protected $table = "meeting";
+    protected $primaryKey = "meeting_id";
+    protected $fillable = ['branch_id','department_id','designation_id','user_id','title','time','description'];
 
 
     public function validation() {

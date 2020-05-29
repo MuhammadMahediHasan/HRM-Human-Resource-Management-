@@ -139,11 +139,11 @@
                         </li>
 
                         <li class=" ">
-                            <a href="/meeting&event" class="waves-effect waves-dark">
+                            <a href="/meeting" class="waves-effect waves-dark">
                                 <span class="pcoded-micon">
                                     <i class="fas fa-bullhorn"></i>
                                 </span>
-                                <span class="pcoded-mtext">Meeting & Event</span>
+                                <span class="pcoded-mtext">Meeting</span>
                             </a>
                         </li>
                         

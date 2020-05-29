@@ -61,7 +61,7 @@ Route::group(['middleware'=>'auth'],function(){
 	Route::resource('/task','TaskController');
 
 	//Meeting & Event
-	Route::resource('/meeting&event','MeetingEventController');
+	Route::resource('/meeting','MeetingController');
 
 });
 Auth::routes();
