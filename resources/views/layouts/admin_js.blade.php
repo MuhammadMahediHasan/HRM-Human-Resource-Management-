@@ -6,7 +6,7 @@
 
 
     <!-- Required Jquery -->
-    <script type="e199b3246449b1f7ddce3235-text/javascript" src="https://colorlib.com//polygon/admindek/files/bower_components/jquery/js/jquery.min.js"></script>
+    <script type="e199b3246449b1f7ddce3235-text/javascript" src="{{asset('backend_asset/js/jquery.min.js')}}"></script>
 
     <script src="http://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 
