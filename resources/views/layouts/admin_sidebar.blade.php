@@ -146,6 +146,15 @@
                                 <span class="pcoded-mtext">Meeting</span>
                             </a>
                         </li>
+
+                        <li class=" ">
+                            <a href="/hr_calendar" class="waves-effect waves-dark">
+                                <span class="pcoded-micon">
+                                    <i class="fas fa-bullhorn"></i>
+                                </span>
+                                <span class="pcoded-mtext">HR Calendar</span>
+                            </a>
+                        </li>
                         
                         <li class="pcoded-hasmenu">
                             <a href="javascript:void(0)" class="waves-effect waves-dark">

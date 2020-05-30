@@ -10,7 +10,6 @@
 
     <script src="http://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 
-    <script type="text/javascript" src="{{asset('backend_asset/vue.min.js')}}"></script>
 
     <!-- <script type="e199b3246449b1f7ddce3235-text/javascript" src="https://colorlib.com//polygon/admindek/files/bower_components/jquery-ui/js/jquery-ui.min.js"></script> -->
     <script type="e199b3246449b1f7ddce3235-text/javascript" src="{{asset('backend_asset/js/popper.min.js')}}"></script>
@@ -62,13 +61,14 @@
 <!-- <script src="https://colorlib.com//polygon/admindek/files/assets/pages/forms-wizard-validation/form-wizard.js" type="139efc0826ba73366986c34c-text/javascript"></script> -->
 
 <!-- <script src="https://ajax.cloudflare.com/cdn-cgi/scripts/a2bd7673/cloudflare-static/rocket-loader.min.js" data-cf-settings="139efc0826ba73366986c34c-|49" defer=""></script> -->
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.26.0/moment.min.js"></script>
 <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>  
 {!! Toastr::message() !!}     
 <script type="text/javascript">
     var token = "{{csrf_token()}}";
     var baseUrl = "{{url('/')}}"
 </script>
+<script type="text/javascript" src="{{asset('backend_asset/vue.min.js')}}"></script>
 <script type="text/javascript" src="{{asset('backend_asset/script.js')}}"></script>
 <!-- <script type="text/javascript">
 

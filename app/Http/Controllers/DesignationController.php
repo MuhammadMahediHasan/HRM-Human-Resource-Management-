@@ -19,7 +19,8 @@ class DesignationController extends Controller
     public function index()
     {
         $department=DepartmentModel::where('department_status','Active')->get();
-        $designation=DesignationModel::join('department','designation.department_name','=','department.department_id')->where('designation_status','Active')->get();
+        $designation=DesignationModel::join('department','designation.department_name','=','department.department_id')->get();
+        
         return view('designation.designation',['department'=>$department,'designation'=>$designation]);
     }
 
