@@ -215,21 +215,11 @@
                 margin: 0;
                 padding: 30px 0;
                 text-transform: uppercase;
-                width: 50%;
-            }
-
-            .actions button:first-of-type {
-                border-right: 1px solid rgba(73, 114, 133, .6);
+                width: 100%;
             }
 
             .actions button:hover {
-                background: #497285;
                 cursor: pointer;
-            }
-
-            .actions button:active {
-                background: #5889a0;
-                outline: none;
             }
 
             /* Flip animation */
@@ -279,39 +269,37 @@
 
                                                 <div class="weeks">
                                                   <div v-for="(day, index) in calendar_days">
-                                                    <span v-for="day_date in day.days" v-text="day_date['_d'].getDate()" :class="changeClass(day_date['_d'])"></span>
+                                                        <span v-for="day_date in day.days" 
+                                                              v-text="day_date['_d'].getDate()" 
+                                                              :class="changeClass(day_date['_d'])"
+                                                              @click="getDayWiseMeeting(day_date['_d'])">    
+                                                        </span>
                                                   </div>
                                                 </div>
                                             </div>
                                         </div>
 
                                         <div class="back">
-                                          <input placeholder="What's the event?">
+                                            <div class="current-date">
+                                                <h1 v-text="current_day"></h1>
+                                                <h1 v-text="current_month"></h1>   
+                                            </div>
                                           <div class="info">
-                                            <div class="date">
-                                              <p class="info-date">
-                                              Date: <span>Jan 15th, 2016</span>
-                                              </p>
-                                              <p class="info-time">
-                                                Time: <span>6:35 PM</span>
-                                              </p>
-                                            </div>
-                                            <div class="address">
-                                              <p>
-                                                Address: <span>129 W 81st St, New York, NY</span>
-                                              </p>
-                                            </div>
-                                            <div class="observations">
-                                              <p>
-                                                Observations: <span>Be there 15 minutes earlier</span>
-                                              </p>
-                                            </div>
+                                                <table class="table table-bordered">
+                                                    <tr>
+                                                        <th>Title</th>
+                                                        <th>Description</th>  
+                                                        <th>Time</th>  
+                                                    </tr>
+                                                    <tr v-for="day_meeting in DayWiseMeetings">
+                                                        <td v-text="day_meeting.title"></td>
+                                                        <td v-text="day_meeting.description"></td>
+                                                        <td v-text="day_meeting.time"></td>
+                                                    </tr>
+                                                </table>
                                           </div>
 
                                           <div class="actions">
-                                            <button class="save">
-                                              Save <i class="ion-checkmark"></i>
-                                            </button>
                                             <button class="dismiss">
                                               Dismiss <i class="ion-android-close"></i>
                                             </button>
@@ -338,56 +326,35 @@
 @stop     
 @section('script')
     <script type="text/javascript">
-        var app = {
-            settings: {
-                container: $('.calendar'),
-                calendar: $('.front'),
-                days: $('.weeks span'),
-                form: $('.back'),
-                input: $('.back input'),
-                buttons: $('.back button')
-            },
-
-            init: function() {
-                instance = this;
-                settings = this.settings;
-                this.bindUIActions();
-            },
-
-            swap: function(currentSide, desiredSide) {
-                settings.container.toggleClass('flip');
-
-                currentSide.fadeOut(900);
-                currentSide.hide();
-
-                desiredSide.show();
-            },
-
-            bindUIActions: function() {
-                $(document).on('click', '.active', function () {
-                    alert('oo');
-                    instance.swap(settings.calendar, settings.form);
-                    settings.input.focus();
-                });
-
-                settings.buttons.on('click', function(){
-                    instance.swap(settings.form, settings.calendar);
-                });
-            }
-        }
-
-        app.init();
+        $(document).on('click', '.event', function () {
+            $('.calendar').toggleClass('flip');
+            $('.front').fadeOut(900);
+            $('.front').hide();
+            $('.back').show();
+        });
+        $(document).on('click', '.dismiss', function () {
+            $('.calendar').toggleClass('flip');
+            $('.back').fadeOut(900);
+            $('.back').hide();
+            $('.front').show();
+        });
     </script>
 
     <script type="text/javascript">
         new Vue({
             el: "#vue-calendar",
             data : {
+                csrf_token : token,
+                baseUrl : baseUrl,
+
                 current_month : '',
                 current_day : '',
                 calendar_days : [],
                 number_of_current_month : '',
                 number_of_current_day : '',
+
+                Meetings : [],
+                DayWiseMeetings : [],
             },
             methods : {
                 dateFunction : function(){
@@ -421,10 +388,38 @@
                     else if (_this.number_of_current_month != date.getMonth()) {
                         return 'last-month';
                     }
+
+                    if (_this.Meetings.includes(date.getDate())) {
+                        return 'event';
+                    }
                 },
+
+                getMeeting : function() {
+                    const _this = this;
+                    $.ajax({
+                        url : _this.baseUrl + '/meeting/create',
+                        type : 'get',
+                        success : function( response ) {
+                            _this.Meetings = response;
+                        }
+                    });
+                },
+
+                getDayWiseMeeting : function(date){
+                    const _this = this;
+                    _this.DayWiseMeetings = [],
+                    $.ajax({
+                        url : _this.baseUrl + '/meeting/' + date.getDate(),
+                        type : 'get',
+                        success : function( response ) {
+                            _this.DayWiseMeetings = response;
+                        }
+                    });
+                }
             },
             mounted(){
                 this.dateFunction();
+                this.getMeeting();
             }
         });
     </script>

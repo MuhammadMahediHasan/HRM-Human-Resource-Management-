@@ -11,6 +11,7 @@ use Validator;
 use Redirect;
 use Toastr;
 use Mail;
+use DB;
 
 class MeetingController extends Controller
 {
@@ -39,7 +40,13 @@ class MeetingController extends Controller
      */
     public function create()
     {
+        $data = MeetingModel::whereMonth('time',date('m'))
+                            ->select(DB::raw('DAY(time) as day'))
+                            ->get()
+                            ->pluck('day')
+                            ->toArray();
 
+        return response()->json($data);
     }
 
     /**
@@ -89,7 +96,9 @@ class MeetingController extends Controller
      */
     public function show($id)
     {
-        //
+        $data = MeetingModel::whereDay('time', $id)->whereMonth('time', date('m'))->get();
+
+        return response()->json($data);
     }
 
     /**
