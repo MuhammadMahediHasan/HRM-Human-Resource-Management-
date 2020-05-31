@@ -96,7 +96,7 @@ class MeetingController extends Controller
      */
     public function show($id)
     {
-        $data = MeetingModel::whereDay('time', $id)->whereMonth('time', date('m'))->get();
+        $data = MeetingModel::whereDay('time', $id)->whereMonth('time', date('m'))->select('meeting.*',DB::raw('TIME_FORMAT(time, "%h %i %p") as time'),DB::raw('DATE_FORMAT(time, "%d %M %Y") as date'))->get();
 
         return response()->json($data);
     }

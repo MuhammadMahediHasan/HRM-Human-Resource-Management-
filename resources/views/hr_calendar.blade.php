@@ -1,4 +1,7 @@
 @extends('backend')
+@section('style')
+    <link rel="stylesheet" type="text/css" href="{{ asset('backend_asset/hr_calendar.css') }}">
+@stop  
 @section('main_content')  
 
 <div class="pcoded-content">
@@ -26,215 +29,6 @@
     </div>
     <!-- [ breadcrumb ] end -->
 
-    <style type="text/css">
-        * {
-              box-sizing: border-box;
-              font-family: 'Roboto', sans-serif;
-              list-style: none;
-              margin: 0;
-              outline: none;
-              padding: 0;
-            }
-
-            a {
-              text-decoration: none;
-            }
-
-            body, html {
-              height: 100%;
-            }
-
-            body {
-                background: #dfebed;
-                font-family: 'Roboto', sans-serif;
-            }
-
-            .container {
-                align-items: center;
-                display: flex;
-                height: 100%;
-                justify-content: center;
-                margin: 0 auto;
-                max-width: 600px;
-                width: 100%;
-            }
-
-            .calendar {
-                background: #2b4450;
-                border-radius: 4px;
-                box-shadow: 0 5px 20px rgba(0, 0, 0, .3);
-                height: 501px;
-                perspective: 1000;
-                transition: .9s;
-                transform-style: preserve-3d;
-                width: 100%;
-            }
-
-            /* Front - Calendar */
-            .front {
-                transform: rotateY(0deg);
-            }
-
-            .current-date {
-                border-bottom: 1px solid rgba(73, 114, 133, .6);
-                display: flex;
-                justify-content: space-between;
-                padding: 30px 40px;
-            }
-
-            .current-date h1 {
-                color: #dfebed;
-                font-size: 1.4em;
-                font-weight: 300;
-            }
-
-            .week-days {
-                color: #dfebed;
-                display: flex;
-                justify-content: space-between;
-                font-weight: 600;
-                padding: 30px 40px;
-            }
-
-            .days {
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: space-between;
-            }
-
-            .weeks {
-                color: #fff;
-                display: flex;
-                flex-direction: column;
-                padding: 0 40px;
-            }
-
-            .weeks div {
-                display: flex;
-                font-size: 1.2em;
-                font-weight: 300;
-                justify-content: space-between;
-                margin-bottom: 20px;
-                width: 100%;
-            }
-
-            .last-month {
-                opacity: .3;
-            }
-
-            .weeks span {
-                padding: 10px;
-            }
-
-            .weeks span.active {
-                background: #ed6321;
-                /*border-radius: 50%;*/
-            }
-
-            .weeks span:not(.last-month):hover {
-                cursor: pointer;
-                font-weight: 600;
-            }
-
-            .event {
-                position: relative;
-            }
-
-            .event:after {
-                content: '•';
-                color: #f78536;
-                font-size: 1.4em;
-                position: absolute;
-                right: -4px;
-                top: -4px;
-            }
-
-            /* Back - Event form */
-
-            .back {
-                height: 100%;
-                transform: rotateY(180deg);
-            }
-
-            .back input {
-                background: none;
-                border: none;
-                border-bottom: 1px solid rgba(73, 114, 133, .6);
-                color: #dfebed;
-                font-size: 1.4em;
-                font-weight: 300;
-                padding: 30px 40px;
-                width: 100%;
-            }
-
-            .info {
-                color: #dfebed;
-                display: flex;
-                flex-direction: column;
-                font-weight: 600;
-                font-size: 1.2em;
-                padding: 30px 40px;
-            }
-
-            .info div:not(.observations) {
-                margin-bottom: 40px;
-            }
-
-            .info span {
-                font-weight: 300;
-            }
-
-            .info .date {
-                display: flex;
-                justify-content: space-between;
-            }
-
-            .info .date p {
-                width: 50%;
-            }
-
-            .info .address p {
-                width: 100%;
-            }
-
-            .actions {
-                bottom: 0;
-                border-top: 1px solid rgba(73, 114, 133, .6);
-                display: flex;
-                justify-content: space-between;
-                position: absolute;
-                width: 100%;
-            }
-
-            .actions button {
-                background: none;
-                border: 0;
-                color: #fff;
-                font-weight: 600;
-                letter-spacing: 3px;
-                margin: 0;
-                padding: 30px 0;
-                text-transform: uppercase;
-                width: 100%;
-            }
-
-            .actions button:hover {
-                cursor: pointer;
-            }
-
-            /* Flip animation */
-
-            .flip {
-                transform: rotateY(180deg);
-            }
-
-            .front, .back {
-                backface-visibility: hidden;
-            }
-
-
-    </style>
-
     <div class="pcoded-inner-content">
         <!-- Main-body start -->
         <div class="main-body">
@@ -245,7 +39,7 @@
                         <div class="col-sm-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h5>Branch List</h5>
+                                    <h5>HR Calendar</h5>
                                     <span>Table</span>
                                 </div>
                                 <div class="card-block">
@@ -289,11 +83,13 @@
                                                     <tr>
                                                         <th>Title</th>
                                                         <th>Description</th>  
+                                                        <th>Date</th>  
                                                         <th>Time</th>  
                                                     </tr>
                                                     <tr v-for="day_meeting in DayWiseMeetings">
                                                         <td v-text="day_meeting.title"></td>
                                                         <td v-text="day_meeting.description"></td>
+                                                        <td v-text="day_meeting.date"></td>
                                                         <td v-text="day_meeting.time"></td>
                                                     </tr>
                                                 </table>
@@ -363,21 +159,23 @@
                     const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
                     const d = new Date();
 
-                    _this.current_month = monthNames[d.getMonth()]+','+d.getFullYear();
+                    _this.current_month = d.getDate() +'-'+ monthNames[d.getMonth()]+'-'+d.getFullYear();
                     _this.current_day = weekDay[d.getDay()];
+
                     _this.number_of_current_month = d.getMonth();
                     _this.number_of_current_day = d.getDate();
 
                     const startWeek = moment().startOf('month').week();
                     const endWeek = moment().endOf('month').week();
                     let cal = []
-                    for(var week = startWeek; week<endWeek;week++){
+                    for(var week = startWeek; week<endWeek+1;week++){
                       cal.push({
                         week:week,
                         days:Array(7).fill(0).map((n, i) => moment().week(week).startOf('week').clone().add(n + i, 'day'))
                       })
                     }
                     _this.calendar_days = cal;
+                    console.log(_this.calendar_days);
                 },
 
                 changeClass : function(date) {

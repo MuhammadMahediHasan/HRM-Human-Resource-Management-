@@ -89,3 +89,34 @@ select.form-control:not([size]):not([multiple]) {
 .col-form-label {
     font-size: 12px;
 }
+
+.pcoded .pcoded-navbar .nav-list {
+    height: calc(100vh - 56px);
+}
+.pcoded-navigation-label{
+    border-bottom: 1px solid #212c37;
+}
+
+.card-red {
+    background: #FF5370;
+}
+
+.card-blue {
+    background: #4099ff;
+}
+
+.card-green {
+    background: #2ed8b6;
+}
+
+.card-yellow {
+    background: #FFB64D;
+}
+
+.col-auto {
+    width: 48px;
+    background: #fff;
+    padding: 14px 8px 12px 8px;
+    text-align: center;
+    border-radius: 50%;
+}

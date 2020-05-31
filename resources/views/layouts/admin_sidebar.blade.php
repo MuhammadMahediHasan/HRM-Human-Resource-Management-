@@ -4,10 +4,10 @@
         <nav class="pcoded-navbar">
             <div class="nav-list">
                 <div class="pcoded-inner-navbar main-menu">
-                    <div class="pcoded-navigation-label" style="border-bottom: 1px solid #212c37;">Navigation</div>
+                    <div class="pcoded-navigation-label">Navigation</div>
                     <ul class="pcoded-item pcoded-left-item">
                         <li class=" ">
-                            <a href="/backend" class="waves-effect waves-dark">
+                            <a href="/home" class="waves-effect waves-dark">
                                 <span class="pcoded-micon">
                                     <i class="fas fa-chart-pie"></i>
                                 </span>
@@ -116,11 +116,11 @@
                                         <span class="pcoded-mtext">Salary Slip</span>
                                     </a>
                                 </li>
-                                <li class="">
+                               <!--  <li class="">
                                     <a href="/salary_slip" class="waves-effect waves-dark">
                                         <span class="pcoded-mtext">Salary Slip Report</span>
                                     </a>
-                                </li>
+                                </li> -->
                                 <!-- <li class="">
                                     <a href="/salary_slip" class="waves-effect waves-dark">
                                         <span class="pcoded-mtext">Total Earning Report</span>
@@ -150,7 +150,7 @@
                         <li class=" ">
                             <a href="/hr_calendar" class="waves-effect waves-dark">
                                 <span class="pcoded-micon">
-                                    <i class="fas fa-bullhorn"></i>
+                                    <i class="far fa-calendar-check"></i>
                                 </span>
                                 <span class="pcoded-mtext">HR Calendar</span>
                             </a>
@@ -194,7 +194,7 @@
                                 </li>
                                 <li class="">
                                     <a href="/leave" class="waves-effect waves-dark">
-                                        <span class="pcoded-mtext">Add Employee Leave</span>
+                                        <span class="pcoded-mtext">Employee Leave</span>
                                     </a>
                                 </li>
                             </ul>
@@ -210,7 +210,7 @@
                         </li>
 
                     </ul>
-                    <div class="pcoded-navigation-label" style="border-bottom: 1px solid #212c37;">Navigation</div>
+                    <div class="pcoded-navigation-label">Navigation</div>
                 </div>
             </div>
         </nav>

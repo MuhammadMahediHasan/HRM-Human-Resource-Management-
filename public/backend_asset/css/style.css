@@ -9956,7 +9956,9 @@ table.dataTable.dtr-inline.collapsed>tbody>tr>th:first-child:before {
 	}
 	.header-navbar .navbar-container .nav-left,
 	.header-navbar .navbar-wrapper .navbar-container .nav-right {
-		display: none
+		display: none;
+		background: #fff;
+    	margin-right: 25px;
 	}
 }
 @media only screen and (max-width: 991px) {

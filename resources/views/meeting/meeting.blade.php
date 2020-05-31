@@ -1,5 +1,5 @@
 @extends('backend')
-@section('main_content')  
+@section('main_content') 
 
 <div class="pcoded-content">
     <!-- [ breadcrumb ] start -->

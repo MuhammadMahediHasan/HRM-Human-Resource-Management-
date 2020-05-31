@@ -18,6 +18,7 @@ Route::group(['middleware'=>'auth'],function(){
 	Route::get('/hr_calendar', function() { return view('hr_calendar'); });
 
 	Route::get('/backend','BackendController@index');
+	Route::get('/get_dashboard_data','BackendController@DashboardData');
 	Route::resource('/setup','SetupController');
 	Route::resource('/branch','BranchController');
 	Route::resource('/department','DepartmentController');
