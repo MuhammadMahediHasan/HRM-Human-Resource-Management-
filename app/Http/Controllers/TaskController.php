@@ -26,7 +26,7 @@ class TaskController extends Controller
         $data['team'] = TeamModel::all();
         $data['project'] = ProjectModel::all();
         $data['employee'] = EmployeModel::get()->toArray();
-        $data['task'] = TaskModel::join('project','project.project_id','=','task.project_id')->with('team_member')->get()->toArray();
+        $data['task'] = TaskModel::join('project','project.project_id','=','task.project_id')->with('team_member')->select('project.project_name','task.*')->get()->toArray();
 
         return view('project.task',$data);
     }
@@ -86,6 +86,27 @@ class TaskController extends Controller
 
          $data['team_member_id'] = TaskAssignModel::where('task_id',$id)->get()->pluck('task_assign_member_id')->toArray();
         return response()->json($data);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function taskStatus($id)
+    {
+        $status_data=TaskModel::findOrFail($id);
+        if ($status_data->status == 1) 
+        {
+            $status_data->update(['status' => 0]);
+        }
+        else
+        {
+            $status_data->update(['status'=> 1]);
+        }
+        Toastr::success('Task Status Changed', '', ["positionClass" => "toast-top-right"]);
+        return back();
     }
 
     /**

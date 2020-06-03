@@ -11,7 +11,7 @@
             <nav class="navbar header-navbar pcoded-header">
                 <div class="navbar-wrapper">
                     <div class="navbar-logo">
-                        <a href="index-2.html">
+                        <a href="/home">
                             <img style="width: 73px;" class="img-fluid" src="{{asset('backend_asset/logo.png')}}"/>
                         </a>
                         <a class="mobile-menu" id="mobile-collapse" href="#!">

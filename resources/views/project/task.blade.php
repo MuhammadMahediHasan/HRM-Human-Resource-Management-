@@ -144,6 +144,7 @@
                                                     <th>Start Date</th>
                                                     <th>End Date</th>
                                                     <th>Assigned Member</th>
+                                                    <th>Status</th>
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
@@ -173,6 +174,13 @@
                                                         <br>
                                                         @endforeach
                                                     </td>
+                                                    <td>
+                                                        @if($task_data['status'] == 1)
+                                                            <label class="label label-success">Complete</label>
+                                                        @else
+                                                            <label class="label label-success">Ongoing</label>
+                                                        @endif
+                                                    </td>
                                                     <td class="action">
                                                         {{Form::open(['url'=>"/task/".$task_data['task_id'],'method'=>'DELETE'])}}
                                                         <button class="btn btn-link"><i class="fas fa-trash text-danger" onclick="return confirm('Are You Sure?')"></i></button>
@@ -180,6 +188,16 @@
 
                                                         {{Form::open(['url'=>"/task/".$task_data['task_id']."/edit",'method'=>'GET'])}}
                                                         <button class="btn btn-link"><i class="fas fa-edit text-primary"></i></button>
+                                                        {{Form::close()}}
+
+                                                        {{Form::open(['url'=>"/task_status/".$task_data['task_id'],'method'=>'GET'])}}
+                                                        <button class="btn btn-link">
+                                                            @if($task_data['status'] == 1)
+                                                            <i class="fas fa-spinner text-warning"></i>
+                                                            @else
+                                                            <i class="fas fa-spinner text-success"></i>
+                                                            @endif
+                                                        </button>
                                                         {{Form::close()}}
                                                     </td>
                                                 </tr>
@@ -194,6 +212,7 @@
                                                     <th>Start Date</th>
                                                     <th>End Date</th>
                                                     <th>Assigned Member</th>
+                                                    <th>Status</th>
                                                     <th>Action</th>
                                                 </tr>
                                             </tfoot>

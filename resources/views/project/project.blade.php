@@ -106,6 +106,7 @@
                                                     <th>Project Name</th>
                                                     <th>Working Team</th>
                                                     <th>Description</th>
+                                                    <th>Status</th>
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
@@ -116,6 +117,13 @@
                                                     <td>{{$project_data->project_name}}</td>
                                                     <td>{{$project_data->team_name}}</td>
                                                     <td>{{$project_data->description}}</td>
+                                                    <td>
+                                                        @if($project_data->status == 1)
+                                                            <label class="label label-success">Complete</label>
+                                                        @else
+                                                            <label class="label label-success">Ongoing</label>
+                                                        @endif
+                                                    </td>
                                                     <td class="action">
                                                         {{Form::open(['url'=>"project/$project_data->project_id",'method'=>'DELETE'])}}
                                                             <button class="btn btn-link"><i class="fas fa-trash text-danger" onclick="return confirm('Are You Sure?')"></i></button>
@@ -123,6 +131,16 @@
 
                                                         {{Form::open(['url'=>"project/$project_data->project_id/edit",'method'=>'GET'])}}
                                                             <button class="btn btn-link"><i class="fas fa-edit text-primary"></i></button>
+                                                        {{Form::close()}}
+
+                                                        {{Form::open(['url'=>"project/$project_data->project_id",'method'=>'GET'])}}
+                                                            <button class="btn btn-link">
+                                                                @if($project_data->status == 1)
+                                                                <i class="fas fa-spinner text-warning"></i>
+                                                                @else
+                                                                <i class="fas fa-spinner text-success"></i>
+                                                                @endif
+                                                            </button>
                                                         {{Form::close()}}
                                                     </td>
                                                 </tr>
@@ -134,6 +152,7 @@
                                                     <th>Project Name</th>
                                                     <th>Working Team</th>
                                                     <th>Description</th>
+                                                    <th>Status</th>
                                                     <th>Action</th>
                                                 </tr>
                                             </tfoot>

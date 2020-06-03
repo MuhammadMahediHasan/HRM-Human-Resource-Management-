@@ -63,7 +63,17 @@ class ProjectController extends Controller
      */
     public function show($id)
     {
-        //
+        $status_data=ProjectModel::findOrFail($id);
+        if ($status_data->status == 1) 
+        {
+            $status_data->update(['status' => 0]);
+        }
+        else
+        {
+            $status_data->update(['status'=> 1]);
+        }
+        Toastr::success('Project Status Changed', '', ["positionClass" => "toast-top-right"]);
+            return back();
     }
 
     /**

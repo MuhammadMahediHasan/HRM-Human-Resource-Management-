@@ -18,11 +18,11 @@
     <!-- feather icon -->
     <link rel="stylesheet" type="text/css" href="https://colorlib.com//polygon/admindek/files/assets/icon/feather/css/feather.css">
     <!-- themify-icons line icon -->
-    <link rel="stylesheet" type="text/css" href="https://colorlib.com//polygon/admindek/files/assets/icon/themify-icons/themify-icons.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/themify-icons/0.1.2/css/themify-icons.css">
     <!-- ico font -->
-    <link rel="stylesheet" type="text/css" href="https://colorlib.com//polygon/admindek/files/assets/icon/icofont/css/icofont.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/5.1.0-0/collection/components/icon/icon.min.css">
     <!-- Font Awesome -->
-    <link rel="stylesheet" type="text/css" href="https://colorlib.com//polygon/admindek/files/assets/icon/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
     
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <!-- Data Table Css -->

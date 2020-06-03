@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\AuthorizationException;
+use App\SalarySlipModel;
+use App\AttendenceModel;
+use App\EmployeModel;
 use Auth;
 
 class HomeController extends Controller
@@ -25,7 +28,15 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('layouts.admin_dashboard');
+        $data['present'] = AttendenceModel::whereDate('date',date('Y-m-d'))->count();
+        
+        $total_employees = EmployeModel::count();
+        $data['absent'] = $total_employees - $data['present'];
+
+        $data['paid'] = SalarySlipModel::where('month',date('Y-m'))->count();
+        $data['unpaid'] = $total_employees - $data['paid'];
+
+        return view('layouts.admin_dashboard',$data);
     }
 
 

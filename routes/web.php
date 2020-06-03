@@ -17,7 +17,7 @@ Route::group(['middleware'=>'auth'],function(){
 
 	Route::get('/hr_calendar', function() { return view('hr_calendar'); });
 
-	Route::get('/backend','BackendController@index');
+	// Route::get('/backend','BackendController@index');
 	Route::get('/get_dashboard_data','BackendController@DashboardData');
 	Route::resource('/setup','SetupController');
 	Route::resource('/branch','BranchController');
@@ -62,6 +62,7 @@ Route::group(['middleware'=>'auth'],function(){
 	//Project & Task
 	Route::resource('/project','ProjectController');
 	Route::resource('/task','TaskController');
+	Route::get('/task_status/{id}','TaskController@taskStatus');
 
 	//Meeting & Event
 	Route::resource('/meeting','MeetingController');

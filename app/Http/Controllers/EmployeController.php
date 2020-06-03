@@ -28,9 +28,9 @@ class EmployeController extends Controller
     public function index()
     {
 
-        $employee=EmployeModel::join('branch','branch.branch_id','=','users.branch_name')
-                                ->join('designation','designation.designation_id','=','users.id')
-                                ->join('department','department.department_id','=','users.id')
+        $employee=EmployeModel::leftJoin('branch','branch.branch_id','=','users.branch_name')
+                                ->leftJoin('designation','designation.designation_id','=','users.id')
+                                ->leftJoin('department','department.department_id','=','users.id')
                                 ->get();
 
         return view('employe.employe_report',['employee'=>$employee]);
